@@ -1,8 +1,12 @@
 package com.qr_storeage.QR_StoragePt2.Models.Totes;
 
+import com.qr_storeage.QR_StoragePt2.Models.Authentication.User;
+import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Tote {
@@ -10,13 +14,15 @@ public class Tote {
     @Id
     @GeneratedValue
     private Long id;
-    private List<Item> items;
+    private Item[] items;
+
+    @OneToOne
     private User user;
 
     public Tote() {
     }
 
-    public Tote(List<Item> items, User user) {
+    public Tote(Item[] items, User user) {
         this.items = items;
         this.user = user;
     }
@@ -29,11 +35,11 @@ public class Tote {
         this.id = id;
     }
 
-    public List<Item> getItems() {
+    public Item[] getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(Item[] items) {
         this.items = items;
     }
 

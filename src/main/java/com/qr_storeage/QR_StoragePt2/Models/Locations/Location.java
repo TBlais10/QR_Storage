@@ -4,7 +4,6 @@ import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Location {
@@ -14,14 +13,14 @@ public class Location {
     private Long id;
 
     private String name;
-    private List<Item> items;
+    private Item[] items;
     @ManyToOne
     private Facility facility;
 
     public Location() {
     }
 
-    public Location(String name, List<Item> items, Facility facility) {
+    public Location(String name, Item[] items, Facility facility) {
         this.name = name;
         this.items = items;
         this.facility = facility;
@@ -43,11 +42,11 @@ public class Location {
         this.name = name;
     }
 
-    public List<Item> getItems() {
+    public Item[] getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(Item[] items) {
         this.items = items;
     }
 

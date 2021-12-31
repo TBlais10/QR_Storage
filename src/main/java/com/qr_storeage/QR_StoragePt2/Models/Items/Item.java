@@ -14,16 +14,16 @@ public class Item {
     private String name;
     private String description;
     private Long quantity;
-    private String condition;
+    private String cond; //condition of item
 
     public Item() {
     }
 
-    public Item(String name, String description, Long quantity, String condition) {
+    public Item(String name, String description, Long quantity, String cond) {
         this.name = name;
         this.description = description;
         this.quantity = quantity;
-        this.condition = condition;
+        this.cond = cond;
     }
 
     public Long getId() {
@@ -58,11 +58,11 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public String getCondition() {
-        return condition;
+    public String getCond() {
+        return cond;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
+    public void setCond(String cond) {
+        this.cond = cond;
     }
 }

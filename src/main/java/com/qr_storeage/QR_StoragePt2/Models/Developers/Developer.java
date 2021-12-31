@@ -1,7 +1,8 @@
 package com.qr_storeage.QR_StoragePt2.Models.Developers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.qr_storeage.QR_StoragePt2.Models.Authentication.User;
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
-import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
 
 import javax.persistence.*;
 
@@ -13,24 +14,25 @@ public class Developer {
     private Long id;
     private String name;
     private String email;
-    private Facility facility;
+    private String facility;
 
     @OneToOne
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore
     private User user;
 
 
     public Developer() {
     }
 
-    public Developer(String name, String email, Facility facility, Avatar avatar, User user) {
+    public Developer(String name, String email, String facility) {
         this.name = name;
         this.email = email;
         this.facility = facility;
-        this.avatar = avatar;
-        this.user = user;
     }
 
     public Long getId() {
@@ -73,11 +75,20 @@ public class Developer {
         this.user = user;
     }
 
-    public Facility getFacility() {
+    public String getFacility() {
         return facility;
     }
 
-    public void setFacility(Facility facility) {
+    public void setFacility(String facility) {
         this.facility = facility;
     }
+
+    //
+//    public Facility getFacility() {
+//        return facility;
+//    }
+//
+//    public void setFacility(Facility facility) {
+//        this.facility = facility;
+//    }
 }
