@@ -1,8 +1,8 @@
 package com.qr_storeage.QR_StoragePt2.Models.Items;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
+
+import javax.persistence.*;
 
 @Entity
 public class Item {
@@ -10,6 +10,10 @@ public class Item {
     @Id
     @GeneratedValue
     private Long id;
+
+    @ManyToMany
+    @JoinColumn(name="facility_id", referencedColumnName = "id")
+    private Location location;
 
     private String name;
     private String description;
@@ -64,5 +68,13 @@ public class Item {
 
     public void setCond(String cond) {
         this.cond = cond;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
