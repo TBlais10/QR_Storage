@@ -17,6 +17,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	// https://mvnrepository.com/artifact/com.google.zxing/core
 	implementation group: 'com.google.zxing', name: 'core', version: '3.4.1'
+	// https://mvnrepository.com/artifact/net.sf.barcode4j/barcode4j
+	implementation group: 'net.sf.barcode4j', name: 'barcode4j', version: '2.1'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
