@@ -2,6 +2,7 @@ package com.qr_storeage.QR_StoragePt2.Models.Items;
 
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
@@ -16,13 +17,20 @@ public class Item {
     @JoinColumn(name="facility_id", referencedColumnName = "id")
     private Location location;
 
+    @NotNull
     private String name;
     private String description;
     private Long quantity;
+
+    @NotNull
     private String cond; //condition of item
+
+    @NotNull
     private String type;
     private String color;
-    private String serialNumber;
+    private String serialNumber; //TODO: metaIdentifier - not specific .... identifier type? sql word? (RESEARCH IT)
+    private Double price;
+    //mac address??
 
     @OneToOne
     @JoinColumn(name = "avatar_id")
@@ -31,7 +39,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(Location location, String name, String description, Long quantity, String cond, String type, String color, String serialNumber) {
+    public Item(Location location, String name, String description, Long quantity, String cond, String type, String color, String serialNumber, Double price) {
         this.location = location;
         this.name = name;
         this.description = description;
@@ -40,6 +48,7 @@ public class Item {
         this.type = type;
         this.color = color;
         this.serialNumber = serialNumber;
+        this.price = price;
     }
 
     public Long getId() {
@@ -120,5 +129,13 @@ public class Item {
 
     public void setAvatar(Avatar avatar) {
         this.avatar = avatar;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

@@ -44,12 +44,12 @@ public class DevController {
     }
 
     @PostMapping
-    public ResponseEntity<Developer> createDeveloper(@RequestBody Developer newDeveloper){
+    public ResponseEntity<Developer> createDeveloper(@RequestBody Developer newDeveloper){ //TODO: Try catches for @NotNull fields
         return new ResponseEntity<>(repository.save(newDeveloper), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody Developer updateDeveloper(@PathVariable Long id, @RequestBody Developer updates){
+    public @ResponseBody Developer updateDeveloper(@PathVariable Long id, @RequestBody Developer updates){ //TODO: Try catches for @NotNull fields
 
         Developer developer = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 

@@ -2,7 +2,6 @@ package com.qr_storeage.QR_StoragePt2.Models.Locations;
 
 import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
-import com.qr_storeage.QR_StoragePt2.Models.Items.SalesItem;
 
 import javax.persistence.*;
 import java.util.List;
