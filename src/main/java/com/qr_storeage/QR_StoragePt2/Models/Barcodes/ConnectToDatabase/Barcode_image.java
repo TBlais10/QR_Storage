@@ -11,9 +11,9 @@ import java.io.IOException;
 
 public class Barcode_image {
 
-    private String ImgFolderPath = "C:\\Users\\kille\\Documents\\careerdevs\\2021_12\\QR_StoragePt2\\QRCodes\\Images";
+    private static String ImgFolderPath = "C:\\Users\\kille\\Documents\\careerdevs\\2021_12\\QR_StoragePt2\\QRCodes\\Images";
 
-    public void createBarCode128(String fileName){
+    public static void createBarCode128(String fileName){
         try {
             Code128Bean bean = new Code128Bean();
             final int dpi = 160;
