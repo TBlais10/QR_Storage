@@ -22,7 +22,7 @@ public class Barcode_pdf {
 
             bean.doQuietZone(false);
 
-            File outputFile = new File(PdfFolderPath + fileName + ".JPG");
+            File outputFile = new File(PdfFolderPath + fileName + ".PDF");
 
             FileOutputStream out = new FileOutputStream(outputFile);
 

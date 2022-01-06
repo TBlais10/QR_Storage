@@ -40,8 +40,8 @@ public class Barcode_image {
         }
     }
 
-//    public static void main(String[] args) {
-//        createBarCode128("Test1");
-//    }
+    public static void main(String[] args) {
+        createBarCode128("Hi Jeff");
+    }
 
 }
