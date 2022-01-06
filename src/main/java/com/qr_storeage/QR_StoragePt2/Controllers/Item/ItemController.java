@@ -18,7 +18,7 @@ public class ItemController {
 //    public ResponseEntity<Iterable<Item>> getAll(){
 //        return new ResponseEntity<Iterable<Item>>(repository.findAll(), HttpStatus.OK);
 //    }
-//
+
 //    @GetMapping("/createBarcode/{id}")
 //    public String createBarcode(@PathVariable Long id){
 //        try{

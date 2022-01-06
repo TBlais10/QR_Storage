@@ -19,6 +19,9 @@ public class Facility {
     @OneToOne
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;
+
+    @OneToMany
+    @JoinColumn(name = "facility_id", referencedColumnName = "id")
     private List<Location> locations;
 
     @OneToMany

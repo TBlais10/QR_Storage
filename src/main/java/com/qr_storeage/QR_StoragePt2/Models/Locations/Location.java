@@ -14,7 +14,9 @@ public class Location {
     private Long id;
 
     private String name;
+
     @ManyToOne
+    @JoinColumn(name = "facility_id", referencedColumnName = "id")
     private Facility facility;
 
     @ManyToMany

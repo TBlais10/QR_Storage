@@ -6,6 +6,8 @@ import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Developer {
@@ -14,10 +16,12 @@ public class Developer {
     @GeneratedValue
     private Long id;
 
-    @NotNull
+    @NotBlank(message = "Name must be filled in")
+    @Size(max = 50)
     private String name;
 
-    @NotNull
+    @NotBlank(message = "Email must be filled in")
+    @Size(max = 50)
     private String email;
     private String facility;
 
@@ -88,7 +92,7 @@ public class Developer {
         this.facility = facility;
     }
 
-    //
+    //for the class Facility
 //    public Facility getFacility() {
 //        return facility;
 //    }

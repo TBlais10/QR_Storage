@@ -2,9 +2,9 @@ package com.qr_storeage.QR_StoragePt2.Models.Items;
 
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Item {
@@ -14,18 +14,17 @@ public class Item {
     private Long id;
 
     @ManyToMany
-    @JoinColumn(name="facility_id", referencedColumnName = "id")
+    @JoinColumn(name="location_id", referencedColumnName = "id")
     private Location location;
 
-    @NotNull
+    @NotBlank(message = "Item must have a name")
     private String name;
     private String description;
     private Long quantity;
 
-    @NotNull
+    @NotBlank(message = "Condition of item must be given")
     private String cond; //condition of item
 
-    @NotNull
     private String type;
     private String color;
     private String serialNumber; //TODO: metaIdentifier - not specific .... identifier type? sql word? (RESEARCH IT)
@@ -33,7 +32,7 @@ public class Item {
     //mac address??
 
     @OneToOne
-    @JoinColumn(name = "avatar_id")
+    @JoinColumn(name = "avatar_id", referencedColumnName = "id")
     private Avatar avatar;
 
     public Item() {
