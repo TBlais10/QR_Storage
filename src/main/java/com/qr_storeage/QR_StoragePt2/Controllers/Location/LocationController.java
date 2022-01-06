@@ -22,17 +22,17 @@ public class LocationController {
     @Autowired
     ItemRepository itemRepository;
 
-    @GetMapping
-    public String createBarcode(@PathVariable Long id){
-        try{
-            Location location = repository.findById(id); //TODO: Research why this repo does not have the same commands a s devRepo
-            Barcode_image.createBarCode128(location.getName()+ ".png");
-            Barcode_pdf.createBarCode128(location.getName()+ ".pdf");
-            return "Barcodes create for " + location.getName() + ".";
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    @GetMapping
+//    public String createBarcode(@PathVariable Long id){
+//        try{
+//            Location location = repository.findById(id); //TODO: Research why this repo does not have the same commands a s devRepo
+//            Barcode_image.createBarCode128(location.getName()+ ".png");
+//            Barcode_pdf.createBarCode128(location.getName()+ ".pdf");
+//            return "Barcodes create for " + location.getName() + ".";
+//        } catch (Exception e){
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
 }

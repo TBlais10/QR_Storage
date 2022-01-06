@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class Barcode_pdf {
 
-    public static String PdfFolderPath = "C:\\Users\\kille\\Documents\\careerdevs\\2021_12\\QR_StoragePt2\\QRCodes\\PDF";
+    public static String PdfFolderPath = "C:\\Users\\kille\\Documents\\careerdevs\\2021_12\\QR_StoragePt2\\QRCodes\\PDF\\";
 
     public static void createBarCode128(String fileName) {
         try {
@@ -38,5 +38,9 @@ public class Barcode_pdf {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        createBarCode128("Path test");
     }
 }

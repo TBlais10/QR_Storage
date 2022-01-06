@@ -21,18 +21,13 @@ public class Location {
     @JoinColumn(name="location_id", referencedColumnName = "id")
     private List<Item> items;
 
-    @ManyToMany
-    @JoinColumn(name="location_id", referencedColumnName = "id")
-    private List<SalesItem> salesItems;
-
     public Location() {
     }
 
-    public Location(String name, Facility facility, List<Item> items, List<SalesItem> salesItems) {
+    public Location(String name, Facility facility, List<Item> items) {
         this.name = name;
         this.facility = facility;
         this.items = items;
-        this.salesItems = salesItems;
     }
 
     public Long getId() {
@@ -57,14 +52,6 @@ public class Location {
 
     public void setItems(List<Item> items) {
         this.items = items;
-    }
-
-    public List<SalesItem> getSalesItems() {
-        return salesItems;
-    }
-
-    public void setSalesItems(List<SalesItem> salesItems) {
-        this.salesItems = salesItems;
     }
 
     public Facility getFacility() {
