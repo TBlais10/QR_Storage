@@ -1,7 +1,12 @@
 package com.qr_storeage.QR_StoragePt2.Models.Authentication;
 
+import com.qr_storeage.QR_StoragePt2.Models.Totes.Tote;
+
 import javax.management.relation.Role;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,19 +20,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotBlank
-//    @Email
+    @NotBlank
+    @Email
     private String username;
 
-//    @NotBlank
-//    @Size(min = 5, max = 100)
+    @NotBlank
+    @Size(min = 5, max = 100)
     private String password;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "user_roles",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private Set<Role> roles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    @OneToOne
+    private Tote tote;
 
     public User() {
     }

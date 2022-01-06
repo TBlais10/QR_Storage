@@ -4,6 +4,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -13,6 +14,7 @@ public class Location {
     @GeneratedValue
     private Long id;
 
+    @NotBlank(message = "Locations must have a name")
     private String name;
 
     @ManyToOne

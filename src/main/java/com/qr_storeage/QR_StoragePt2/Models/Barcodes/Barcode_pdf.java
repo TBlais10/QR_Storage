@@ -1,4 +1,4 @@
-package com.qr_storeage.QR_StoragePt2.Models.Barcodes.ConnectToDatabase;
+package com.qr_storeage.QR_StoragePt2.Models.Barcodes;
 
 import org.krysalis.barcode4j.impl.code128.Code128Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
@@ -9,11 +9,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class Barcode_image {
+public class Barcode_pdf {
 
-    private static String ImgFolderPath = "C:\\Users\\kille\\Documents\\careerdevs\\2021_12\\QR_StoragePt2\\QRCodes\\Images\\";
+    public static String PdfFolderPath = "C:\\Users\\kille\\Documents\\careerdevs\\2021_12\\QR_StoragePt2\\QRCodes\\PDF\\";
 
-    public static void createBarCode128(String fileName){
+    public static void createBarCode128(String fileName) {
         try {
             Code128Bean bean = new Code128Bean();
             final int dpi = 160;
@@ -22,12 +22,12 @@ public class Barcode_image {
 
             bean.doQuietZone(false);
 
-            File outputFile = new File(ImgFolderPath + fileName + ".JPG");
+            File outputFile = new File(PdfFolderPath + fileName + ".JPG");
 
             FileOutputStream out = new FileOutputStream(outputFile);
 
             BitmapCanvasProvider canvas = new BitmapCanvasProvider(
-                    out, "image/x-png", dpi, BufferedImage.TYPE_BYTE_BINARY, false,0
+                    out, "image/x-png", dpi, BufferedImage.TYPE_BYTE_BINARY, false, 0
             );
 
             bean.generateBarcode(canvas, fileName);
@@ -35,13 +35,12 @@ public class Barcode_image {
             canvas.finish();
 
             System.out.println("Barcode for " + fileName + " successfully created.");
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        createBarCode128("Test1");
-    }
-
+//    public static void main(String[] args) {
+//        createBarCode128("Path test");
+//    }
 }

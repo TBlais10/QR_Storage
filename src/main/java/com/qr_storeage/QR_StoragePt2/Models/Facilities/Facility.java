@@ -6,6 +6,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,9 @@ public class Facility {
     @GeneratedValue
     private Long id;
 
+    @NotBlank(message = "Facility must have a name.")
     private String name;
+
     @OneToOne
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;

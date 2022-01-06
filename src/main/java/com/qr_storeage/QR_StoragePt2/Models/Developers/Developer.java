@@ -3,7 +3,6 @@ package com.qr_storeage.QR_StoragePt2.Models.Developers;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qr_storeage.QR_StoragePt2.Models.Authentication.User;
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
