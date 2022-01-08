@@ -16,6 +16,7 @@ public class Tote {
     @GeneratedValue
     private Long id;
     private List<Item> items;
+    private String name;
 
     @OneToOne
     private User user;
@@ -26,6 +27,7 @@ public class Tote {
     public Tote(List<Item> items, User user) {
         this.items = items;
         this.user = user;
+        this.name = "Tote " + id;
     }
 
     public Long getId() {
@@ -42,6 +44,14 @@ public class Tote {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public User getUser() {
