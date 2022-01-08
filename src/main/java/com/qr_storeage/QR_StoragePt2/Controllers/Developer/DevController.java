@@ -23,10 +23,10 @@ public class DevController {
     private DeveloperRepository repository;
 
     @Autowired
-    AvatarRepository avatarRepository;
+    private AvatarRepository avatarRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @GetMapping
     public @ResponseBody List<Developer> getDevelopers(){

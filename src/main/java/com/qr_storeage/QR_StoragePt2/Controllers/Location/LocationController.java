@@ -11,15 +11,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/location")
 public class LocationController {
 
     @Autowired
-    LocationRepository repository;
+    private LocationRepository repository;
 
     @Autowired
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
 
     @GetMapping("/{id}")
     public String createBarcode(@PathVariable Long id){

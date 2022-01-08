@@ -19,7 +19,7 @@ import java.util.List;
 public class ToteController {
 
     @Autowired
-    ToteRepository repository;
+    private ToteRepository repository;
 
     @GetMapping
     public ResponseEntity<Iterable<Tote>> getAll (){

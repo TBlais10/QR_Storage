@@ -7,6 +7,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 public class Developer {
@@ -22,7 +23,14 @@ public class Developer {
     @NotBlank(message = "Email must be filled in")
     @Size(max = 50)
     private String email;
-    private String facility;
+
+    @ManyToMany
+    @JoinTable(
+            name = "developer_facility",
+            joinColumns = @JoinColumn(name = "developer_id"),
+            inverseJoinColumns = @JoinColumn(name = "facility_id")
+    )
+    private Set<String> facility;
 
     @OneToOne
     @JoinColumn(name = "avatar_id")
@@ -37,7 +45,7 @@ public class Developer {
     public Developer() {
     }
 
-    public Developer(String name, String email, String facility) {
+    public Developer(String name, String email, Set<String> facility) {
         this.name = name;
         this.email = email;
         this.facility = facility;
@@ -83,20 +91,11 @@ public class Developer {
         this.user = user;
     }
 
-    public String getFacility() {
+    public Set<String> getFacility() {
         return facility;
     }
 
-    public void setFacility(String facility) {
+    public void setFacility(Set<String> facility) {
         this.facility = facility;
     }
-
-    //for the class Facility
-//    public Facility getFacility() {
-//        return facility;
-//    }
-//
-//    public void setFacility(Facility facility) {
-//        this.facility = facility;
-//    }
 }

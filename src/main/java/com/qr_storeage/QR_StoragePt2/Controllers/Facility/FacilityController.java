@@ -8,12 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/Facility")
 public class FacilityController {
 
     @Autowired
-    FacilityRepository repository;
+    private FacilityRepository repository;
 
     @GetMapping
     public ResponseEntity<Iterable<Facility>> getAll(){

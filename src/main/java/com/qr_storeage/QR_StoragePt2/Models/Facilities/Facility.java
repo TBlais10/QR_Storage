@@ -8,12 +8,13 @@ import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Facility {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Facility must have a name.")
@@ -27,8 +28,13 @@ public class Facility {
     @JoinColumn(name = "facility_id", referencedColumnName = "id")
     private List<Location> locations;
 
-    @OneToMany
-    private Developer developers;
+    @ManyToMany
+    @JoinTable(
+            name="developer_facility",
+            joinColumns = @JoinColumn(name = "facility_id"),
+            inverseJoinColumns = @JoinColumn(name = "developer_id")
+    )
+    private Set<Developer> developers;
 
     @OneToMany
     private User users;
@@ -36,10 +42,11 @@ public class Facility {
     public Facility() {
     }
 
-    public Facility(String name, Avatar avatar, List<Location> locations) {
+    public Facility(String name, Avatar avatar, List<Location> locations, Set<Developer> developers) {
         this.name = name;
         this.avatar = avatar;
         this.locations = locations;
+        this.developers = developers;
     }
 
     public Long getId() {
@@ -74,11 +81,11 @@ public class Facility {
         this.locations = locations;
     }
 
-    public Developer getDevelopers() {
+    public Set<Developer> getDevelopers() {
         return developers;
     }
 
-    public void setDevelopers(Developer developers) {
+    public void setDevelopers(Set<Developer> developers) {
         this.developers = developers;
     }
 
