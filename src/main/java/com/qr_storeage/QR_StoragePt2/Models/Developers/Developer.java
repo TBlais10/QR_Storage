@@ -13,14 +13,14 @@ import java.util.Set;
 public class Developer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name must be filled in")
+    @NotBlank(message = "Name cannot be blank")
     @Size(max = 50)
     private String name;
 
-    @NotBlank(message = "Email must be filled in")
+    @NotBlank(message = "Email cannot be blank")
     @Size(max = 50)
     private String email;
 

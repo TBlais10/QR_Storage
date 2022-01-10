@@ -36,7 +36,7 @@ public class Facility {
     )
     private Set<Developer> developers;
 
-    @OneToMany
+    @ManyToMany
     private User users;
 
     public Facility() {

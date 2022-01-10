@@ -5,12 +5,13 @@ import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
 @Entity
 public class Item {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToMany
@@ -28,7 +29,7 @@ public class Item {
     private String type;
     private String color;
     private String serialNumber; //TODO: metaIdentifier - not specific .... identifier type? sql word? (RESEARCH IT)
-    private Double price;
+    private BigDecimal price;
     //mac address??
 
     @OneToOne
@@ -38,7 +39,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(Location location, String name, String description, Long quantity, String cond, String type, String color, String serialNumber, Double price) {
+    public Item(Location location, String name, String description, Long quantity, String cond, String type, String color, String serialNumber, BigDecimal price) {
         this.location = location;
         this.name = name;
         this.description = description;
@@ -130,11 +131,11 @@ public class Item {
         this.avatar = avatar;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

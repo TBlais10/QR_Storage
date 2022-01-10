@@ -10,9 +10,13 @@ import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+
+@Validated
 @CrossOrigin
 @RestController
 @RequestMapping("/api/items")
@@ -55,10 +59,28 @@ public class ItemController {
     }
 
     @PostMapping //TODO: Implement try catch for Not Empty checks + Test by creating items.
-    public ResponseEntity<Item> createItem(@RequestBody Item item){
+    public ResponseEntity<Item> createItem(@Valid @RequestBody Item item){
         System.out.println(item.getLocation().getId());
 
         return new ResponseEntity<>(repository.save(item), HttpStatus.OK);
+
+    }
+
+    @PutMapping("/{id}")
+    public @ResponseBody Item updateOne (@PathVariable Long id, @RequestBody Item update){
+        Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (update.getLocation() != null) item.setLocation(update.getLocation());
+        if (update.getName() != null) item.setName(update.getName());
+        if (update.getDescription() != null) item.setDescription(update.getDescription());
+        if (update.getQuantity() != null) item.setQuantity(update.getQuantity());
+        if (update.getCond() != null) item.setCond(update.getCond());
+        if (update.getType() != null) item.setType(update.getType());
+        if (update.getColor() != null) item.setColor(update.getColor());
+        if (update.getSerialNumber() != null) item.setSerialNumber(update.getSerialNumber());
+        if (update.getPrice() != null) item.setPrice(update.getPrice());
+
+        return repository.save(item);
 
     }
 

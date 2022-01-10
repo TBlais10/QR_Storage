@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/Facility")
@@ -26,10 +28,19 @@ public class FacilityController {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-//    @PostMapping
-//    public ResponseEntity<Facility> createOne(@RequestBody Facility facility){
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Facility> getById(@PathVariable Long id){
+//        Optional<Facility> facility = repository.findById(id);
 //
+//        if (facility.isEmpty()){
+//            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+//        }
 //    }
+
+    @PostMapping
+    public Facility createOne(@RequestBody Facility newFacility){
+        return repository.save(newFacility);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteByFacilityId (@PathVariable Long id){

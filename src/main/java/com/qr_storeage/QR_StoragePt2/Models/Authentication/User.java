@@ -20,11 +20,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Username cannot be blank")
     @Email
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "Password cannot be blank")
     @Size(min = 5, max = 100)
     private String password;
 
