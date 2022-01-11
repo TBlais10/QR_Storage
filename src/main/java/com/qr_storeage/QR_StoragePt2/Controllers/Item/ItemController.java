@@ -7,6 +7,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.ItemRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
+import com.qr_storeage.QR_StoragePt2.Repositories.ToteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,7 +60,7 @@ public class ItemController {
     }
 
     @PostMapping //TODO: Implement try catch for Not Empty checks + Test by creating items.
-    public ResponseEntity<Item> createItem(@Valid @RequestBody Item item){
+    public ResponseEntity<Item> createItem(@RequestBody Item item){
 //        System.out.println(item.getLocation().getId()); //TODO: Create method that iterates thru the list to check this field.
 
         return new ResponseEntity<>(repository.save(item), HttpStatus.OK);

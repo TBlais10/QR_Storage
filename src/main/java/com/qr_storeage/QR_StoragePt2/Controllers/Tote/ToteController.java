@@ -36,7 +36,7 @@ public class ToteController {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)).getItems();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/generateBarcode/{id}")
     public String createBarcode(@PathVariable Long id){
         try{
             Tote tote = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); //TODO: Research why this repo does not have the same commands a s devRepo

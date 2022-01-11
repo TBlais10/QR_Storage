@@ -2,9 +2,11 @@ package com.qr_storeage.QR_StoragePt2.Models.Items;
 
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
+import com.qr_storeage.QR_StoragePt2.Models.Totes.Tote;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -24,31 +26,39 @@ public class Item {
     private Set<Location> location;
 
 
-    @NotBlank(message = "Item must have a name")
+//    @NotBlank(message = "Item must have a name")
     private String name;
     private String description;
     private Long quantity;
 
-    @NotBlank(message = "Condition of item must be given")
-    private String cond; //condition of item
+//    @NotEmpty(message = "Condition of item must be given")
+    @Enumerated(EnumType.STRING)
+    private ECond cond; //condition of item
 
+    private EStatus status;
     private String type;
     private String color;
     private String serialNumber; //TODO: metaIdentifier - not specific .... identifier type? sql word? (RESEARCH IT)
     private BigDecimal price;
 
+    @Enumerated(EnumType.STRING)
+
     @OneToOne
     @JoinColumn(name = "avatar_id", referencedColumnName = "id")
     private Avatar avatar;
 
+    @ManyToOne
+    private Tote tote;
+
     public Item() {
     }
 
-    public Item(String name, String description, Long quantity, String cond, String type, String color, String serialNumber, BigDecimal price) {
+    public Item(String name, String description, Long quantity, ECond cond, EStatus status, String type, String color, String serialNumber, BigDecimal price) {
         this.name = name;
         this.description = description;
         this.quantity = quantity;
         this.cond = cond;
+        this.status = status;
         this.type = type;
         this.color = color;
         this.serialNumber = serialNumber;
@@ -87,11 +97,11 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public String getCond() {
+    public ECond getCond() {
         return cond;
     }
 
-    public void setCond(String cond) {
+    public void setCond(ECond cond) {
         this.cond = cond;
     }
 
@@ -141,5 +151,13 @@ public class Item {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Tote getTote() {
+        return tote;
+    }
+
+    public void setTote(Tote tote) {
+        this.tote = tote;
     }
 }
