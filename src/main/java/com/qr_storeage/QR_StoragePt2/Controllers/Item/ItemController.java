@@ -60,7 +60,7 @@ public class ItemController {
 
     @PostMapping //TODO: Implement try catch for Not Empty checks + Test by creating items.
     public ResponseEntity<Item> createItem(@Valid @RequestBody Item item){
-        System.out.println(item.getLocation().getId());
+//        System.out.println(item.getLocation().getId()); //TODO: Create method that iterates thru the list to check this field.
 
         return new ResponseEntity<>(repository.save(item), HttpStatus.OK);
 
@@ -70,7 +70,6 @@ public class ItemController {
     public @ResponseBody Item updateOne (@PathVariable Long id, @RequestBody Item update){
         Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        if (update.getLocation() != null) item.setLocation(update.getLocation());
         if (update.getName() != null) item.setName(update.getName());
         if (update.getDescription() != null) item.setDescription(update.getDescription());
         if (update.getQuantity() != null) item.setQuantity(update.getQuantity());

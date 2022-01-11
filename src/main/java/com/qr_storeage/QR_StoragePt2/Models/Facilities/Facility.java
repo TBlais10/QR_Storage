@@ -36,8 +36,8 @@ public class Facility {
     )
     private Set<Developer> developers;
 
-    @ManyToMany
-    private User users;
+    //@ManyToMany
+//    private User users;
 
     public Facility() {
     }
@@ -89,11 +89,11 @@ public class Facility {
         this.developers = developers;
     }
 
-    public User getUsers() {
-        return users;
-    }
-
-    public void setUsers(User users) {
-        this.users = users;
-    }
+//    public User getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(User users) {
+//        this.users = users;
+//    }
 }

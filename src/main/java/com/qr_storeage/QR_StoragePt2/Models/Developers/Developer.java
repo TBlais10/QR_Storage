@@ -3,6 +3,7 @@ package com.qr_storeage.QR_StoragePt2.Models.Developers;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qr_storeage.QR_StoragePt2.Models.Authentication.User;
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
+import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -30,7 +31,7 @@ public class Developer {
             joinColumns = @JoinColumn(name = "developer_id"),
             inverseJoinColumns = @JoinColumn(name = "facility_id")
     )
-    private Set<String> facility;
+    private Set<Facility> facility;
 
     @OneToOne
     @JoinColumn(name = "avatar_id")
@@ -45,10 +46,9 @@ public class Developer {
     public Developer() {
     }
 
-    public Developer(String name, String email, Set<String> facility) {
+    public Developer(String name, String email) {
         this.name = name;
         this.email = email;
-        this.facility = facility;
     }
 
     public Long getId() {
@@ -91,11 +91,11 @@ public class Developer {
         this.user = user;
     }
 
-    public Set<String> getFacility() {
+    public Set<Facility> getFacility() {
         return facility;
     }
 
-    public void setFacility(Set<String> facility) {
+    public void setFacility(Set<Facility> facility) {
         this.facility = facility;
     }
 }

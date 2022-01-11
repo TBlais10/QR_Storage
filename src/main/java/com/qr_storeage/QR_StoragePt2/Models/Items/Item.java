@@ -6,6 +6,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 public class Item {
@@ -15,8 +16,13 @@ public class Item {
     private Long id;
 
     @ManyToMany
-    @JoinColumn(name="location_id", referencedColumnName = "id")
-    private Location location;
+    @JoinTable(
+            name="location_item",
+            joinColumns = @JoinColumn(name = "item_id"),
+            inverseJoinColumns = @JoinColumn(name = "location_id")
+    )
+    private Set<Location> location;
+
 
     @NotBlank(message = "Item must have a name")
     private String name;
@@ -30,7 +36,6 @@ public class Item {
     private String color;
     private String serialNumber; //TODO: metaIdentifier - not specific .... identifier type? sql word? (RESEARCH IT)
     private BigDecimal price;
-    //mac address??
 
     @OneToOne
     @JoinColumn(name = "avatar_id", referencedColumnName = "id")
@@ -39,8 +44,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(Location location, String name, String description, Long quantity, String cond, String type, String color, String serialNumber, BigDecimal price) {
-        this.location = location;
+    public Item(String name, String description, Long quantity, String cond, String type, String color, String serialNumber, BigDecimal price) {
         this.name = name;
         this.description = description;
         this.quantity = quantity;
@@ -91,11 +95,11 @@ public class Item {
         this.cond = cond;
     }
 
-    public Location getLocation() {
+    public Set<Location> getLocation() { //TODO: Add a way to iterate thru the list to get a specific location.
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(Set<Location> location) {
         this.location = location;
     }
 
