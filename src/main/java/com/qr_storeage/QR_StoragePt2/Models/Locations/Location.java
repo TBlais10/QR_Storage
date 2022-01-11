@@ -6,6 +6,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Location {
@@ -22,8 +23,12 @@ public class Location {
     private Facility facility;
 
     @ManyToMany
-    @JoinColumn(name="location_id", referencedColumnName = "id")
-    private List<Item> items;
+    @JoinTable(
+            name="location_item",
+            joinColumns = @JoinColumn(name = "location_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id")
+    )
+    private Set<Item> items;
 
     public Location() {
     }
@@ -31,7 +36,6 @@ public class Location {
     public Location(String name, Facility facility, List<Item> items) {
         this.name = name;
         this.facility = facility;
-        this.items = items;
     }
 
     public Long getId() {
@@ -50,11 +54,11 @@ public class Location {
         this.name = name;
     }
 
-    public List<Item> getItems() {
+    public Set<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(Set<Item> items) {
         this.items = items;
     }
 

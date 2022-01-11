@@ -1,16 +1,20 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Developer;
 
 import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
+import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
 import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.DeveloperRepository;
+import com.qr_storeage.QR_StoragePt2.Repositories.FacilityRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin
@@ -23,10 +27,13 @@ public class DevController {
     private DeveloperRepository repository;
 
     @Autowired
-    AvatarRepository avatarRepository;
+    private AvatarRepository avatarRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private FacilityRepository facilityRepository;
 
     @GetMapping
     public @ResponseBody List<Developer> getDevelopers(){
@@ -43,8 +50,9 @@ public class DevController {
         return new ResponseEntity<>(repository.findByFacility(facility, Sort.by("name")), HttpStatus.OK);
     }
 
+    @Validated
     @PostMapping
-    public ResponseEntity<Developer> createDeveloper(@RequestBody Developer newDeveloper){ //TODO: Try catches for @NotNull fields
+    public ResponseEntity<Developer> createDeveloper(@Valid @RequestBody Developer newDeveloper){ //TODO: Try catches for @NotNull fields
         return new ResponseEntity<>(repository.save(newDeveloper), HttpStatus.CREATED);
     }
 
@@ -57,6 +65,14 @@ public class DevController {
         if (updates.getEmail() != null) developer.setEmail(updates.getEmail());
         if (updates.getFacility() != null) developer.setFacility(updates.getFacility());
 
+        return repository.save(developer);
+    }
+
+    @PutMapping("/facility")
+    public Developer addFacility(@RequestBody Developer updates){
+        Developer developer = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        developer.getFacility().addAll(updates.getFacility());
         return repository.save(developer);
     }
 
