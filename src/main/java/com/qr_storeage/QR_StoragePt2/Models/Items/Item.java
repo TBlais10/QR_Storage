@@ -160,4 +160,12 @@ public class Item {
     public void setTote(Tote tote) {
         this.tote = tote;
     }
+
+    public EStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EStatus status) {
+        this.status = status;
+    }
 }

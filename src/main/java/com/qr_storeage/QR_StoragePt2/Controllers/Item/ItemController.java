@@ -75,6 +75,7 @@ public class ItemController {
         if (update.getDescription() != null) item.setDescription(update.getDescription());
         if (update.getQuantity() != null) item.setQuantity(update.getQuantity());
         if (update.getCond() != null) item.setCond(update.getCond());
+        if (update.getStatus() != null) item.setStatus(update.getStatus());
         if (update.getType() != null) item.setType(update.getType());
         if (update.getColor() != null) item.setColor(update.getColor());
         if (update.getSerialNumber() != null) item.setSerialNumber(update.getSerialNumber());
