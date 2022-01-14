@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
@@ -19,8 +20,8 @@ public class FacilityController {
     private FacilityRepository repository;
 
     @GetMapping
-    public ResponseEntity<Iterable<Facility>> getAll(){
-        return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
+    public List<Facility> getAll(){
+        return repository.findAll();
     }
 
     @GetMapping("/{id}")

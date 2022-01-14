@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/location")
@@ -22,17 +24,14 @@ public class LocationController {
     @Autowired
     private ItemRepository itemRepository;
 
+    @GetMapping
+    public List<Location> getAll (){
+        return repository.findAll();
+    }
+
     @GetMapping("/{id}")
-    public String createBarcode(@PathVariable Long id){
-        try{
-            Location location = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            Barcode_image.createBarCode128(location.getName()+ ".png");
-            Barcode_pdf.createBarCode128(location.getName()+ ".pdf");
-            return "Barcodes create for " + location.getName() + ".";
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
+    public @ResponseBody Location getOneLocation(@PathVariable Long id){
+        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")

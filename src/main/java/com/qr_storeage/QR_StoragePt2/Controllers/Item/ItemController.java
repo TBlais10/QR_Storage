@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Validated
 @CrossOrigin
@@ -29,8 +30,8 @@ public class ItemController {
     private LocationRepository locationRepository;
 
     @GetMapping
-    public ResponseEntity<Iterable<Item>> getAll(){
-        return new ResponseEntity<Iterable<Item>>(repository.findAll(), HttpStatus.OK);
+    public List<Item> getAll(){
+        return repository.findAll();
     }
 
     @GetMapping("/{id}")
@@ -45,19 +46,6 @@ public class ItemController {
 //            return locationRepository.findByLocationId(id).}
 //    }
 
-
-    @GetMapping("/createBarcode/{id}")
-    public String createBarcode(@PathVariable Long id){
-        try{
-            Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            Barcode_image.createBarCode128(item.getName()+ ".png");
-            Barcode_pdf.createBarCode128(item.getName()+ ".pdf");
-            return "Barcodes create for " + item.getName() + ".";
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     @PostMapping //TODO: Implement try catch for Not Empty checks + Test by creating items.
     public ResponseEntity<Item> createItem(@RequestBody Item item){
