@@ -15,7 +15,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/location")
+@RequestMapping("/api/locations")
 public class LocationController {
 
     @Autowired
@@ -37,6 +37,15 @@ public class LocationController {
     @PostMapping
     public ResponseEntity<Location> createLocation(@RequestBody Location location){
         return new ResponseEntity<>(repository.save(location), HttpStatus.OK);
+    }
+
+    @PutMapping
+    public @ResponseBody Location addItem(@RequestBody Location updates){
+        Location location = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        location.getItems().addAll(updates.getItems());
+
+        return repository.save(location);
     }
 
     @DeleteMapping("/{id}")

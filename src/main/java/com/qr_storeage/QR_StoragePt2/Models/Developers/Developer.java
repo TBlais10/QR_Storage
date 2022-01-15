@@ -8,6 +8,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,11 +18,11 @@ public class Developer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotBlank(message = "Name cannot be blank")
+    @NotBlank(message = "Name cannot be blank")
     @Size(max = 50)
     private String name;
 
-//    @NotBlank(message = "Email cannot be blank")
+    @NotBlank(message = "Email cannot be blank")
     @Size(max = 50)
     private String email;
 
@@ -31,7 +32,7 @@ public class Developer {
             joinColumns = @JoinColumn(name = "developer_id"),
             inverseJoinColumns = @JoinColumn(name = "facility_id")
     )
-    private Set<Facility> facility;
+    private Set<Facility> facilities = new HashSet<>();
 
     @OneToOne
     @JoinColumn(name = "avatar_id")
@@ -91,11 +92,11 @@ public class Developer {
         this.user = user;
     }
 
-    public Set<Facility> getFacility() {
-        return facility;
+    public Set<Facility> getFacilities() {
+        return facilities;
     }
 
-    public void setFacility(Set<Facility> facility) {
-        this.facility = facility;
+    public void setFacilities(Set<Facility> facilities) {
+        this.facilities = facilities;
     }
 }
