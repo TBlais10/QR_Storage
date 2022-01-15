@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -32,7 +33,7 @@ public class ToteController {
     }
 
     @GetMapping("/id")
-    public List<Item> itemsInTote (@PathVariable Long id){
+    public Set<Item> itemsInTote (@PathVariable Long id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)).getItems();
     }
 

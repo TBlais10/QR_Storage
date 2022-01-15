@@ -17,11 +17,11 @@ public class Developer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name cannot be blank")
+//    @NotBlank(message = "Name cannot be blank")
     @Size(max = 50)
     private String name;
 
-    @NotBlank(message = "Email cannot be blank")
+//    @NotBlank(message = "Email cannot be blank")
     @Size(max = 50)
     private String email;
 

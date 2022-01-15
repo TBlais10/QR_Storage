@@ -34,6 +34,11 @@ public class LocationController {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    @PostMapping
+    public ResponseEntity<Location> createLocation(@RequestBody Location location){
+        return new ResponseEntity<>(repository.save(location), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById (@PathVariable Long id){
         String locationName = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)).getName();

@@ -35,17 +35,18 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ECond cond; //condition of item
 
+    @Enumerated(EnumType.STRING)
     private EStatus status;
     private String type;
     private String color;
     private String serialNumber; //TODO: metaIdentifier - not specific .... identifier type? sql word? (RESEARCH IT)
     private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
 
     @OneToOne
     @JoinColumn(name = "avatar_id", referencedColumnName = "id")
     private Avatar avatar;
+
 
     @ManyToOne
     private Tote tote;

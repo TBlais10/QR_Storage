@@ -26,7 +26,7 @@ public class Facility {
 
     @OneToMany
     @JoinColumn(name = "facility_id", referencedColumnName = "id")
-    private List<Location> locations;
+    private Set<Location> locations;
 
     @ManyToMany
     @JoinTable(
@@ -42,11 +42,8 @@ public class Facility {
     public Facility() {
     }
 
-    public Facility(String name, Avatar avatar, List<Location> locations, Set<Developer> developers) {
+    public Facility(String name) {
         this.name = name;
-        this.avatar = avatar;
-        this.locations = locations;
-        this.developers = developers;
     }
 
     public Long getId() {
@@ -73,11 +70,11 @@ public class Facility {
         this.avatar = avatar;
     }
 
-    public List<Location> getLocations() {
+    public Set<Location> getLocations() {
         return locations;
     }
 
-    public void setLocations(List<Location> locations) {
+    public void setLocations(Set<Location> locations) {
         this.locations = locations;
     }
 

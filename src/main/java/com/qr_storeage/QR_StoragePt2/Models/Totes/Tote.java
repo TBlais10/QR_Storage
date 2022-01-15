@@ -5,6 +5,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Tote {
@@ -14,7 +15,7 @@ public class Tote {
     private Long id;
 
     @OneToMany
-    private List<Item> items;
+    private Set<Item> items;
     private String name;
 
     @OneToOne
@@ -24,9 +25,8 @@ public class Tote {
     }
 
     public Tote(List<Item> items, User user) {
-        this.items = items;
         this.user = user;
-        this.name = "Tote " + id;
+        this.name = "TOTE-" + id;
     }
 
     public Long getId() {
@@ -37,11 +37,11 @@ public class Tote {
         this.id = id;
     }
 
-    public List<Item> getItems() {
+    public Set<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(Set<Item> items) {
         this.items = items;
     }
 
