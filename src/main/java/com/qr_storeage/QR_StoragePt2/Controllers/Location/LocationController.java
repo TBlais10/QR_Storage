@@ -1,7 +1,5 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Location;
 
-import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode_image;
-import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode_pdf;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.ItemRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;

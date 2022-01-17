@@ -1,7 +1,5 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Tote;
 
-import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode_image;
-import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode_pdf;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 import com.qr_storeage.QR_StoragePt2.Models.Totes.Tote;
 import com.qr_storeage.QR_StoragePt2.Repositories.ToteRepository;
@@ -11,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Set;
 
 @CrossOrigin
