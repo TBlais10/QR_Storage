@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 
+@Validated
 @CrossOrigin
 @RestController
 @RequestMapping("/api/developers")
@@ -50,29 +51,28 @@ public class DevController {
         return new ResponseEntity<>(repository.findByFacility(facility, Sort.by("name")), HttpStatus.OK);
     }
 
-    @Validated
     @PostMapping
     public ResponseEntity<Developer> createDeveloper(@Valid @RequestBody Developer newDeveloper){ //TODO: Try catches for @NotNull fields
         return new ResponseEntity<>(repository.save(newDeveloper), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody Developer updateDeveloper(@PathVariable Long id, @RequestBody Developer updates){ //TODO: Try catches for @NotNull fields
+    public @ResponseBody Developer updateDeveloper(@Valid @PathVariable Long id, @RequestBody Developer updates){ //TODO: Try catches for @NotNull fields
 
         Developer developer = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         if (updates.getName() != null) developer.setName(updates.getName());
         if (updates.getEmail() != null) developer.setEmail(updates.getEmail());
-        if (updates.getFacility() != null) developer.setFacility(updates.getFacility());
 
         return repository.save(developer);
     }
 
-    @PutMapping("/facility")
+    @PutMapping("/addFacility")
     public Developer addFacility(@RequestBody Developer updates){
         Developer developer = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        developer.getFacility().addAll(updates.getFacility());
+        developer.getFacilities().addAll(updates.getFacilities());
+
         return repository.save(developer);
     }
 

@@ -5,15 +5,18 @@ import com.qr_storeage.QR_StoragePt2.Repositories.FacilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@Validated
 @CrossOrigin
 @RestController
-@RequestMapping("/api/Facility")
+@RequestMapping("/api/facilities")
 public class FacilityController {
 
     @Autowired
@@ -39,8 +42,17 @@ public class FacilityController {
 //    }
 
     @PostMapping
-    public Facility createOne(@RequestBody Facility newFacility){
+    public Facility createOne(@Valid @RequestBody Facility newFacility){
         return repository.save(newFacility);
+    }
+
+    @PutMapping("/addLocation")
+    public @ResponseBody Facility addLocation(@RequestBody Facility updates){
+        Facility facility = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        facility.getLocations().addAll(updates.getLocations());
+
+        return repository.save(facility);
     }
 
     @DeleteMapping("/{id}")

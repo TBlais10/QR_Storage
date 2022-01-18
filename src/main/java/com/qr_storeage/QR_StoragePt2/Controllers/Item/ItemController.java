@@ -1,13 +1,8 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Item;
 
-import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode_image;
-import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode_pdf;
-import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
-import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.ItemRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
-import com.qr_storeage.QR_StoragePt2.Repositories.ToteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Validated

@@ -1,6 +1,6 @@
-package com.qr_storeage.QR_StoragePt2.Models.Barcodes;
+package com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode39;
 
-import org.krysalis.barcode4j.impl.code128.Code128Bean;
+import org.krysalis.barcode4j.impl.code39.Code39Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
 import org.krysalis.barcode4j.tools.UnitConv;
 
@@ -9,39 +9,42 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class Barcode_image {
+public class Barcode39 {
 
-    private static String ImgFolderPath = "C:\\Users\\kille\\Documents\\careerdevs\\2021_12\\QR_StoragePt2\\QRCodes\\Images\\";
+    private static String ImgFolderPath = "C:\\Users\\kille\\Documents\\careerdevs\\2021_12\\QR_StoragePt2\\QRCodes\\39\\";
 
-    public static void createBarCode128(String fileName){
+
+    public static void createBarcode39img(String fileName){
         try {
-            Code128Bean bean = new Code128Bean();
+            Code39Bean bean39 = new Code39Bean();
             final int dpi = 160;
 
-            bean.setModuleWidth((UnitConv.in2mm(2.8f / dpi)));
+            bean39.setModuleWidth(UnitConv.in2mm(2.8f/dpi));
 
-            bean.doQuietZone(false);
+            bean39.doQuietZone(false);
 
             File outputFile = new File(ImgFolderPath + fileName + ".JPG");
 
             FileOutputStream out = new FileOutputStream(outputFile);
 
             BitmapCanvasProvider canvas = new BitmapCanvasProvider(
-                    out, "image/x-png", dpi, BufferedImage.TYPE_BYTE_BINARY, false,0
+                    out, "image/x-png", dpi, BufferedImage.TYPE_BYTE_BINARY, false, 0
             );
 
-            bean.generateBarcode(canvas, fileName);
+            bean39.generateBarcode(canvas, fileName);
 
             canvas.finish();
 
             System.out.println("Barcode for " + fileName + " successfully created.");
-        } catch (IOException ex){
+
+
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        createBarCode128("Hi Jeff");
+        createBarcode39img("Test 1");
     }
 
 }

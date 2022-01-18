@@ -1,7 +1,5 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Location;
 
-import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode_image;
-import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode_pdf;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.ItemRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
@@ -15,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/location")
+@RequestMapping("/api/locations")
 public class LocationController {
 
     @Autowired
@@ -32,6 +30,20 @@ public class LocationController {
     @GetMapping("/{id}")
     public @ResponseBody Location getOneLocation(@PathVariable Long id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping
+    public ResponseEntity<Location> createLocation(@RequestBody Location location){
+        return new ResponseEntity<>(repository.save(location), HttpStatus.OK);
+    }
+
+    @PutMapping
+    public @ResponseBody Location addItem(@RequestBody Location updates){
+        Location location = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        location.getItems().addAll(updates.getItems());
+
+        return repository.save(location);
     }
 
     @DeleteMapping("/{id}")

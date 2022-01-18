@@ -1,7 +1,7 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Barcode;
 
-import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode_image;
-import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode_pdf;
+import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode128.Barcode128;
+import com.qr_storeage.QR_StoragePt2.Models.Barcodes.Barcode39.Barcode39;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Models.Totes.Tote;
@@ -31,8 +31,8 @@ public class BarcodeController {
     public String createItemBarcode(@PathVariable Long id){
         try{
             Item item = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            Barcode_image.createBarCode128(item.getName()+ ".png");
-            Barcode_pdf.createBarCode128(item.getName()+ ".pdf");
+            Barcode128.createBarCode128(item.getName()+ ".png");
+            Barcode39.createBarcode39img(item.getName() + ".png");
             return "Barcodes create for " + item.getName() + ".";
         } catch (Exception e){
             e.printStackTrace();
@@ -45,8 +45,8 @@ public class BarcodeController {
     public String createLocationBarcode(@PathVariable Long id){
         try{
             Location location = locationRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            Barcode_image.createBarCode128(location.getName()+ ".png");
-            Barcode_pdf.createBarCode128(location.getName()+ ".pdf");
+            Barcode128.createBarCode128(location.getName()+ ".png");
+            Barcode39.createBarcode39img(location.getName() + ".png");
             return "Barcodes create for " + location.getName() + ".";
         } catch (Exception e){
             e.printStackTrace();
@@ -58,8 +58,8 @@ public class BarcodeController {
     public String createToteBarcode(@PathVariable Long id){
         try{
             Tote tote = toteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            Barcode_image.createBarCode128(tote.getName()+ ".png");
-            Barcode_pdf.createBarCode128(tote.getName()+ ".pdf");
+            Barcode128.createBarCode128(tote.getName()+ ".png");
+            Barcode39.createBarcode39img(tote.getName() + "png");
             return "Barcodes create for " + tote.getName() + ".";
         } catch (Exception e){
             e.printStackTrace();
