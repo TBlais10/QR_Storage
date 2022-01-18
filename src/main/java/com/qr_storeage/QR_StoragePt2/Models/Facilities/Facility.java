@@ -42,8 +42,9 @@ public class Facility {
     public Facility() {
     }
 
-    public Facility(String name) {
+    public Facility(String name, Avatar avatar) {
         this.name = name;
+        this.avatar = avatar;
     }
 
     public Long getId() {

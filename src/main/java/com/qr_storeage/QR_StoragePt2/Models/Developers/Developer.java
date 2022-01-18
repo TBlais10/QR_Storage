@@ -47,9 +47,11 @@ public class Developer {
     public Developer() {
     }
 
-    public Developer(String name, String email) {
+    public Developer(String name, String email, Avatar avatar, User user) {
         this.name = name;
         this.email = email;
+        this.avatar = avatar;
+        this.user = user;
     }
 
     public Long getId() {

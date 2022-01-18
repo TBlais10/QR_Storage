@@ -33,8 +33,9 @@ public class Location {
     public Location() {
     }
 
-    public Location(String name) {
+    public Location(String name, Facility facility) {
         this.name = name;
+        this.facility = facility;
     }
 
     public Long getId() {
