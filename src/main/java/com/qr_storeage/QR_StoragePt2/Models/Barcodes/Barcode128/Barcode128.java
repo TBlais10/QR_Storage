@@ -9,9 +9,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class Barcode128_image {
+public class Barcode128 {
 
-    private static String ImgFolderPath = "C:\\Users\\kille\\Documents\\careerdevs\\2021_12\\QR_StoragePt2\\QRCodes\\Images\\";
+    private static String ImgFolderPath = "C:\\Users\\kille\\Documents\\careerdevs\\2021_12\\QR_StoragePt2\\QRCodes\\128\\";
 
     public static void createBarCode128(String fileName){
         try {
@@ -35,13 +35,14 @@ public class Barcode128_image {
             canvas.finish();
 
             System.out.println("Barcode for " + fileName + " successfully created.");
+
         } catch (IOException ex){
             ex.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        createBarCode128("Hi Jeff");
+        createBarCode128("Test 1");
     }
 
 }
