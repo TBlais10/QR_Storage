@@ -26,17 +26,21 @@ public class Item {
     private Set<Location> location;
 
 
-//    @NotBlank(message = "Item must have a name")
+    @NotBlank(message = "Item must have a name")
     private String name;
     private String description;
     private Long quantity;
 
-//    @NotEmpty(message = "Condition of item must be given")
+    @NotEmpty(message = "Condition of item must be given")
     @Enumerated(EnumType.STRING)
     private ECond cond; //condition of item
 
     @Enumerated(EnumType.STRING)
     private EStatus status;
+
+    @Enumerated(EnumType.STRING)
+    private ELocationTag locationTag;
+
     private String type;
     private String color;
     private String serialNumber; //TODO: metaIdentifier - not specific .... identifier type? sql word? (RESEARCH IT)
@@ -49,21 +53,23 @@ public class Item {
 
 
     @ManyToOne
-    private Tote tote;
+    private Set<Tote> tote;
 
     public Item() {
     }
 
-    public Item(String name, String description, Long quantity, ECond cond, EStatus status, String type, String color, String serialNumber, BigDecimal price) {
+    public Item(String name, String description, Long quantity, ECond cond, EStatus status, ELocationTag locationTag, String type, String color, String serialNumber, BigDecimal price, Avatar avatar) {
         this.name = name;
         this.description = description;
         this.quantity = quantity;
         this.cond = cond;
         this.status = status;
+        this.locationTag = locationTag;
         this.type = type;
         this.color = color;
         this.serialNumber = serialNumber;
         this.price = price;
+        this.avatar = avatar;
     }
 
     public Long getId() {
@@ -154,11 +160,11 @@ public class Item {
         this.price = price;
     }
 
-    public Tote getTote() {
+    public Set<Tote> getTote() {
         return tote;
     }
 
-    public void setTote(Tote tote) {
+    public void setTote(Set<Tote> tote) {
         this.tote = tote;
     }
 
@@ -168,5 +174,13 @@ public class Item {
 
     public void setStatus(EStatus status) {
         this.status = status;
+    }
+
+    public ELocationTag getLocationTag() {
+        return locationTag;
+    }
+
+    public void setLocationTag(ELocationTag locationTag) {
+        this.locationTag = locationTag;
     }
 }
