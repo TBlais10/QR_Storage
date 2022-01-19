@@ -46,10 +46,10 @@ public class DevController {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/facility/{facility}")
-    public ResponseEntity<List<Developer>> getDeveloperByFacility(@PathVariable String facility){
-        return new ResponseEntity<>(repository.findByFacility(facility, Sort.by("name")), HttpStatus.OK);
-    }
+//    @GetMapping("/facility/{facility}")
+//    public ResponseEntity<List<Developer>> getDeveloperByFacility(@PathVariable String facility){
+//        return new ResponseEntity<>(repository.findByFacility(facility, Sort.by("name")), HttpStatus.OK);
+//    }
 
     @PostMapping
     public ResponseEntity<Developer> createDeveloper(@Valid @RequestBody Developer newDeveloper){ //TODO: Try catches for @NotNull fields

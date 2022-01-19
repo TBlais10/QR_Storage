@@ -31,7 +31,7 @@ public class Item {
     private String description;
     private Long quantity;
 
-    @NotEmpty(message = "Condition of item must be given")
+//    @NotEmpty(message = "Condition of item must be given")
     @Enumerated(EnumType.STRING)
     private ECond cond; //condition of item
 
@@ -53,7 +53,7 @@ public class Item {
 
 
     @ManyToOne
-    private Set<Tote> tote;
+    private Tote tote;
 
     public Item() {
     }
@@ -160,13 +160,13 @@ public class Item {
         this.price = price;
     }
 
-    public Set<Tote> getTote() {
-        return tote;
-    }
-
-    public void setTote(Set<Tote> tote) {
-        this.tote = tote;
-    }
+//    public Set<Tote> getTote() {
+//        return tote;
+//    }
+//
+//    public void setTote(Set<Tote> tote) {
+//        this.tote = tote;
+//    }
 
     public EStatus getStatus() {
         return status;
