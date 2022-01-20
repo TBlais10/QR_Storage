@@ -7,6 +7,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Totes.Tote;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -31,7 +32,7 @@ public class Item {
     private String description;
     private Long quantity;
 
-//    @NotEmpty(message = "Condition of item must be given")
+    @NotNull(message = "Condition of item must be given")
     @Enumerated(EnumType.STRING)
     private ECond cond; //condition of item
 
@@ -45,7 +46,6 @@ public class Item {
     private String color;
     private String serialNumber; //TODO: metaIdentifier - not specific .... identifier type? sql word? (RESEARCH IT)
     private BigDecimal price;
-
 
     @OneToOne
     @JoinColumn(name = "avatar_id", referencedColumnName = "id")

@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Validated
@@ -42,7 +43,7 @@ public class ItemController {
 
 
     @PostMapping //TODO: Implement try catch for Not Empty checks + Test by creating items.
-    public ResponseEntity<Item> createItem(@RequestBody Item item){
+    public ResponseEntity<Item> createItem(@Valid @RequestBody Item item){
 //        System.out.println(item.getLocation().getId()); //TODO: Create method that iterates thru the list to check this field.
 
         return new ResponseEntity<>(repository.save(item), HttpStatus.OK);
