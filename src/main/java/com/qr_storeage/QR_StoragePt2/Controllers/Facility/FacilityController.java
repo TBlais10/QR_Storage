@@ -1,6 +1,9 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Facility;
 
+import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
+import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
 import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
+import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.FacilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,14 +25,17 @@ public class FacilityController {
     @Autowired
     private FacilityRepository repository;
 
-    @GetMapping
-    public List<Facility> getAll(){
-        return repository.findAll();
-    }
+    @Autowired
+    private AvatarRepository avatarRepository;
 
     @GetMapping("/{id}")
     public Facility getById(@PathVariable Long id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping
+    public List<Facility> getAll(){
+        return repository.findAll();
     }
 
 //    @GetMapping("/{id}")
@@ -44,6 +50,14 @@ public class FacilityController {
     @PostMapping
     public Facility createOne(@Valid @RequestBody Facility newFacility){
         return repository.save(newFacility);
+    }
+
+    @PostMapping("/photo")
+    public Facility addPhoto(@RequestBody Facility facil){
+        Facility facility = repository.findById(facil.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Avatar avatar = avatarRepository.save(facility.getAvatar());
+        facility.setAvatar(avatar);
+        return repository.save(facility);
     }
 
     @PutMapping("/addLocation")

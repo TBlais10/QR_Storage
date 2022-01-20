@@ -1,6 +1,8 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Item;
 
+import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
+import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.ItemRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class ItemController {
 
     @Autowired
     private LocationRepository locationRepository;
+
+    @Autowired
+    private AvatarRepository avatarRepository;
 
     @GetMapping
     public List<Item> getAll(){
@@ -47,6 +52,15 @@ public class ItemController {
 //        System.out.println(item.getLocation().getId()); //TODO: Create method that iterates thru the list to check this field.
 
         return new ResponseEntity<>(repository.save(item), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/photo")
+    public Item addPhoto(@RequestBody Item itm){
+        Item item = repository.findById(itm.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Avatar avatar = avatarRepository.save(item.getAvatar());
+        item.setAvatar(avatar);
+        return repository.save(item);
 
     }
 

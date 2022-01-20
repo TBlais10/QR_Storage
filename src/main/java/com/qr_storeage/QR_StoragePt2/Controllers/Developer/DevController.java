@@ -1,5 +1,6 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Developer;
 
+import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
 import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
 import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
@@ -54,6 +55,14 @@ public class DevController {
     @PostMapping
     public ResponseEntity<Developer> createDeveloper(@Valid @RequestBody Developer newDeveloper){ //TODO: Try catches for @NotNull fields
         return new ResponseEntity<>(repository.save(newDeveloper), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/photo")
+    public Developer addPhoto(@RequestBody Developer dev){
+        Developer developer = repository.findById(dev.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Avatar avatar = avatarRepository.save(developer.getAvatar());
+        developer.setAvatar(avatar);
+        return repository.save(developer);
     }
 
     @PutMapping("/{id}")
