@@ -37,6 +37,20 @@ public class LocationController {
         return new ResponseEntity<>(repository.save(location), HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public @ResponseBody Location updateLocation(@PathVariable Long id, @RequestBody Location updates){
+        Location location = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (location.getName() != null) {
+            location.setName(updates.getName());
+        }
+        if (location.getFacility() != null){
+            location.setFacility(updates.getFacility());
+        }
+
+        return repository.save(location);
+    }
+
     @PutMapping
     public @ResponseBody Location addItem(@RequestBody Location updates){
         Location location = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

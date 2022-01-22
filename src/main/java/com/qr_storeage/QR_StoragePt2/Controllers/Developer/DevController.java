@@ -65,6 +65,15 @@ public class DevController {
         return repository.save(developer);
     }
 
+    @PostMapping("/addFacility")
+    public Developer addFacility(@RequestBody Developer updates){
+        Developer developer = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        developer.getFacilities().addAll(updates.getFacilities());
+
+        return repository.save(developer);
+    }
+
     @PutMapping("/{id}")
     public @ResponseBody Developer updateDeveloper(@Valid @PathVariable Long id, @RequestBody Developer updates){ //TODO: Try catches for @NotNull fields
 
@@ -72,15 +81,6 @@ public class DevController {
 
         if (updates.getName() != null) developer.setName(updates.getName());
         if (updates.getEmail() != null) developer.setEmail(updates.getEmail());
-
-        return repository.save(developer);
-    }
-
-    @PutMapping("/addFacility")
-    public Developer addFacility(@RequestBody Developer updates){
-        Developer developer = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        developer.getFacilities().addAll(updates.getFacilities());
 
         return repository.save(developer);
     }

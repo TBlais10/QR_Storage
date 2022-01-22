@@ -34,6 +34,11 @@ public class ToteController {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)).getItems();
     }
 
+    @PostMapping
+    public ResponseEntity<Tote> createTote(@RequestBody Tote tote){
+        return new ResponseEntity<>(repository.save(tote), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById (@PathVariable Long id){
         String toteName = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)).getName();
