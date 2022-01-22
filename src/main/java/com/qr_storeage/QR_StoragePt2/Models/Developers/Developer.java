@@ -38,20 +38,20 @@ public class Developer {
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonIgnore
-    private User user;
+//    @OneToOne
+//    @JoinColumn(name = "user_id", referencedColumnName = "id")
+//    @JsonIgnore
+//    private User user;
 
 
     public Developer() {
     }
 
-    public Developer(String name, String email, Avatar avatar, User user) {
+    public Developer(String name, String email, Avatar avatar/*, User user*/) {
         this.name = name;
         this.email = email;
         this.avatar = avatar;
-        this.user = user;
+//        this.user = user;
     }
 
     public Long getId() {
@@ -86,13 +86,13 @@ public class Developer {
         this.avatar = avatar;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Set<Facility> getFacilities() {
         return facilities;

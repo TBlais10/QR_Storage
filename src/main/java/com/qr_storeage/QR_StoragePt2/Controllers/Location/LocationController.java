@@ -1,8 +1,6 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Location;
 
-import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
-import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.ItemRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
