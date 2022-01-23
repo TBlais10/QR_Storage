@@ -55,7 +55,15 @@ public class FacilityController {
     @PostMapping("/photo")
     public Facility addPhoto(@RequestBody Facility facil){
         Facility facility = repository.findById(facil.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Avatar avatar = avatarRepository.save(facility.getAvatar());
+
+        if (facility.getAvatar() != null){
+            Avatar avatar = facility.getAvatar();
+            avatar.setUrl(facil.getAvatar().getUrl());
+            avatarRepository.save(avatar);
+            return facility;
+        }
+
+        Avatar avatar = avatarRepository.save(facil.getAvatar());
         facility.setAvatar(avatar);
         return repository.save(facility);
     }
