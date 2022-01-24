@@ -22,10 +22,6 @@ public class Tote {
     private User user;
 
     public Tote() {
-    }
-
-    public Tote(List<Item> items, User user) {
-        this.user = user;
         this.name = "TOTE-" + id;
     }
 

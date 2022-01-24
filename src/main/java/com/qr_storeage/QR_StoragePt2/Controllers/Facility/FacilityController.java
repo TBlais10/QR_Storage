@@ -55,12 +55,35 @@ public class FacilityController {
     @PostMapping("/photo")
     public Facility addPhoto(@RequestBody Facility facil){
         Facility facility = repository.findById(facil.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Avatar avatar = avatarRepository.save(facility.getAvatar());
+
+        if (facility.getAvatar() != null){
+            Avatar avatar = facility.getAvatar();
+            avatar.setUrl(facil.getAvatar().getUrl());
+            avatarRepository.save(avatar);
+            return facility;
+        }
+
+        Avatar avatar = avatarRepository.save(facil.getAvatar());
         facility.setAvatar(avatar);
         return repository.save(facility);
     }
 
-    @PutMapping("/addLocation")
+    @PutMapping("/{id}")
+    public @ResponseBody Facility updateFacility(@PathVariable Long id, @RequestBody Facility updates){
+
+        Facility facility = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (facility.getName() != null){
+            facility.setName(updates.getName());
+        }
+        if (facility.getAvatar() != null){
+            facility.setAvatar(updates.getAvatar());
+        }
+
+        return repository.save(facility);
+    }
+
+    @PostMapping("/addLocation")
     public @ResponseBody Facility addLocation(@RequestBody Facility updates){
         Facility facility = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 

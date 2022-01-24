@@ -60,8 +60,24 @@ public class DevController {
     @PostMapping("/photo")
     public Developer addPhoto(@RequestBody Developer dev){
         Developer developer = repository.findById(dev.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Avatar avatar = avatarRepository.save(developer.getAvatar());
+
+        if (developer.getAvatar() != null){
+            Avatar avatar = developer.getAvatar();
+            avatar.setUrl(dev.getAvatar().getUrl());
+            avatarRepository.save(avatar);
+            return developer;
+        }
+        Avatar avatar = avatarRepository.save(dev.getAvatar());
         developer.setAvatar(avatar);
+        return repository.save(developer);
+    }
+
+    @PostMapping("/addFacility")
+    public Developer addFacility(@RequestBody Developer updates){
+        Developer developer = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        developer.getFacilities().addAll(updates.getFacilities());
+
         return repository.save(developer);
     }
 
@@ -72,15 +88,6 @@ public class DevController {
 
         if (updates.getName() != null) developer.setName(updates.getName());
         if (updates.getEmail() != null) developer.setEmail(updates.getEmail());
-
-        return repository.save(developer);
-    }
-
-    @PutMapping("/addFacility")
-    public Developer addFacility(@RequestBody Developer updates){
-        Developer developer = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        developer.getFacilities().addAll(updates.getFacilities());
 
         return repository.save(developer);
     }

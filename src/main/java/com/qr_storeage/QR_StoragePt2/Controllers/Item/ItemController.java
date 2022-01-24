@@ -58,7 +58,14 @@ public class ItemController {
     @PostMapping("/photo")
     public Item addPhoto(@RequestBody Item itm){
         Item item = repository.findById(itm.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Avatar avatar = avatarRepository.save(item.getAvatar());
+
+        if (item.getAvatar() != null){
+            Avatar avatar = item.getAvatar();
+            avatar.setUrl(itm.getAvatar().getUrl());
+            avatarRepository.save(avatar);
+            return item;
+        }
+        Avatar avatar = avatarRepository.save(itm.getAvatar());
         item.setAvatar(avatar);
         return repository.save(item);
 
