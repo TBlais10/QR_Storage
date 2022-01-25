@@ -21,8 +21,9 @@ public class Tote {
     @OneToOne
     private User user;
 
-    public Tote() {
-        this.name = "TOTE-" + id;
+
+    public Tote() { //TODO: this.id returning null on tote creation.
+        this.name = "TOTE-" + this.id;
     }
 
     public Long getId() {

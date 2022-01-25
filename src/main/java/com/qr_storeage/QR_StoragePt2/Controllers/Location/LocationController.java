@@ -1,5 +1,6 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Location;
 
+import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.ItemRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
@@ -51,11 +52,12 @@ public class LocationController {
         return repository.save(location);
     }
 
-    @PutMapping
-    public @ResponseBody Location addItem(@RequestBody Location updates){
+    @PutMapping("/addItem/{iId}")
+    public @ResponseBody Location addItem(@RequestBody Location updates, @RequestBody Long iId){ //TODO: 400 error mapping in Postman
         Location location = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Item item = itemRepository.findById(iId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        location.getItems().addAll(updates.getItems());
+        location.getItems().add(item);
 
         return repository.save(location);
     }

@@ -72,11 +72,12 @@ public class DevController {
         return repository.save(developer);
     }
 
-    @PostMapping("/addFacility")
-    public Developer addFacility(@RequestBody Developer updates){
+    @PostMapping("/addFacility/{fId}")
+    public Developer addFacility(@RequestBody Developer updates, @RequestBody Long fId){
         Developer developer = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Facility facility = facilityRepository.findById(fId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        developer.getFacilities().addAll(updates.getFacilities());
+        developer.getFacilities().add(facility);
 
         return repository.save(developer);
     }

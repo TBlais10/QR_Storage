@@ -31,8 +31,8 @@ public class BarcodeController {
     public String createItemBarcode(@PathVariable Long id){
         try{
             Item item = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            Barcode128.createBarCode128(item.getName()+ ".png");
-            Barcode39.createBarcode39img(item.getName() + ".png");
+            Barcode128.createBarCode128(item.getName());
+            Barcode39.createBarcode39img(item.getName());
             return "Barcodes create for " + item.getName() + ".";
         } catch (Exception e){
             e.printStackTrace();
@@ -45,8 +45,8 @@ public class BarcodeController {
     public String createLocationBarcode(@PathVariable Long id){
         try{
             Location location = locationRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            Barcode128.createBarCode128(location.getName()+ ".png");
-            Barcode39.createBarcode39img(location.getName() + ".png");
+            Barcode128.createBarCode128(location.getName());
+            Barcode39.createBarcode39img(location.getName());
             return "Barcodes create for " + location.getName() + ".";
         } catch (Exception e){
             e.printStackTrace();
@@ -58,8 +58,8 @@ public class BarcodeController {
     public String createToteBarcode(@PathVariable Long id){
         try{
             Tote tote = toteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            Barcode128.createBarCode128(tote.getName()+ ".png");
-            Barcode39.createBarcode39img(tote.getName() + "png");
+            Barcode128.createBarCode128(tote.getName());
+            Barcode39.createBarcode39img(tote.getName());
             return "Barcodes create for " + tote.getName() + ".";
         } catch (Exception e){
             e.printStackTrace();

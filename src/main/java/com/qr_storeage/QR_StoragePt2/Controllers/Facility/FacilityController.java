@@ -3,8 +3,10 @@ package com.qr_storeage.QR_StoragePt2.Controllers.Facility;
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
 import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
+import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.FacilityRepository;
+import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,9 @@ public class FacilityController {
 
     @Autowired
     private FacilityRepository repository;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     @Autowired
     private AvatarRepository avatarRepository;
@@ -83,11 +88,12 @@ public class FacilityController {
         return repository.save(facility);
     }
 
-    @PostMapping("/addLocation")
-    public @ResponseBody Facility addLocation(@RequestBody Facility updates){
+    @PostMapping("/addLocation/{lId}")
+    public @ResponseBody Facility addLocation(@RequestBody Facility updates, @RequestBody Long lId){
         Facility facility = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Location location = locationRepository.findById(lId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        facility.getLocations().addAll(updates.getLocations());
+        facility.getLocations().add(location);
 
         return repository.save(facility);
     }
