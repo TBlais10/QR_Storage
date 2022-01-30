@@ -25,7 +25,7 @@ public class User {
     private String username;
 
     @NotBlank(message = "Password cannot be blank")
-    @Size(min = 5, max = 100)
+    @Size(min = 5, max = 50)
     private String password;
 
 //    @ManyToMany(fetch = FetchType.EAGER)

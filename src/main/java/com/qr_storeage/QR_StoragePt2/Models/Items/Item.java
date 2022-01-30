@@ -1,5 +1,7 @@
 package com.qr_storeage.QR_StoragePt2.Models.Items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Models.Totes.Tote;
@@ -24,6 +26,7 @@ public class Item {
             joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "location_id")
     )
+    @JsonIgnoreProperties({"facility"})
     private Set<Location> location;
 
 
@@ -53,6 +56,7 @@ public class Item {
 
 
     @ManyToOne
+    @JsonIgnore
     private Tote tote;
 
     public Item() {

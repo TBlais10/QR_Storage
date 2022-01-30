@@ -1,5 +1,6 @@
 package com.qr_storeage.QR_StoragePt2.Models.Totes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.qr_storeage.QR_StoragePt2.Models.Authentication.User;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 
@@ -19,6 +20,7 @@ public class Tote {
     private String name;
 
     @OneToOne
+    @JsonIgnoreProperties({"password"})
     private User user;
 
 

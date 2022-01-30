@@ -23,7 +23,7 @@ public class Developer {
     private String name;
 
     @NotBlank(message = "Email cannot be blank")
-    @Size(max = 50)
+    @Size(min = 5)
     private String email;
 
     @ManyToMany

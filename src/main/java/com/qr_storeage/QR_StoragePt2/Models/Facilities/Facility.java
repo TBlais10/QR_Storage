@@ -1,5 +1,6 @@
 package com.qr_storeage.QR_StoragePt2.Models.Facilities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.qr_storeage.QR_StoragePt2.Models.Authentication.User;
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
@@ -33,6 +34,7 @@ public class Facility {
             joinColumns = @JoinColumn(name = "facility_id"),
             inverseJoinColumns = @JoinColumn(name = "developer_id")
     )
+    @JsonIgnoreProperties({"email", "avatar", "facilities"})
     private Set<Developer> developers;
 
     //@ManyToMany
