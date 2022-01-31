@@ -88,13 +88,15 @@ public class FacilityController {
         return repository.save(facility);
     }
 
-    @PostMapping("/addLocation/{lId}")
-    public @ResponseBody Facility addLocation(@RequestBody Facility updates, @RequestBody Long lId){
+    @PostMapping("/addLocation/{lId}") //TODO: Experiencing 405 and 400 errors when trying to run in post man
+    public @ResponseBody Facility addLocation(@RequestBody Facility updates, @PathVariable Long lId){
         Facility facility = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Location location = locationRepository.findById(lId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         facility.getLocations().add(location);
+        location.setFacility(facility);
 
+        locationRepository.save(location);
         return repository.save(facility);
     }
 

@@ -9,6 +9,6 @@ import java.util.List;
 public interface DeveloperRepository extends JpaRepository<Developer, Long> {
 
     //TODO: Research more methods that work w/ sorting and displaying info
-//    List<Developer> findByFacility(String facility, Sort sort);
+//    List<Developer> findByFacility_Id(Long id, Sort sort);
 
 }
