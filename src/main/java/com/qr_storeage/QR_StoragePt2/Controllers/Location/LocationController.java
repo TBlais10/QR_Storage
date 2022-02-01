@@ -52,15 +52,13 @@ public class LocationController {
         return repository.save(location);
     }
 
-    @PutMapping("/addItem/{iId}")
-    public @ResponseBody Location addItem(@RequestBody Location updates, @PathVariable Long iId){ //TODO: Experiencing 405 and 400 errors when trying to run in post man
+    @PostMapping("/addItem/{iId}") //TODO: Create if null catch + infinite json body
+    public @ResponseBody Location addItem(@RequestBody Location updates, @PathVariable Long iId){ //TODO: Create if null check
         Location location = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Item item = itemRepository.findById(iId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         location.getItems().add(item);
-//        item.getLocation().add(location);
 
-//        itemRepository.save(item);
         return repository.save(location);
     }
 

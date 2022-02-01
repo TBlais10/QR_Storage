@@ -72,16 +72,13 @@ public class DevController {
         return repository.save(developer);
     }
 
-    @PostMapping("/addFacility/{fId}") //TODO: Experiencing 405 and 400 errors when trying to run in post man
-    //TODO: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1-1' for key 'developer_facility.PRIMARY' ... new error in post man when just including dev id in JSON raw.
+    @PostMapping("/addFacility/{fId}") //TODO: Create if null catch + infinite json body
+    //Url has the id for the facility, JSON Body = { "id" : the developer id }
     public Developer addFacility(@RequestBody Developer updates, @PathVariable Long fId){
         Developer developer = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Facility facility = facilityRepository.findById(fId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         developer.getFacilities().add(facility);
-        facility.getDevelopers().add(developer);
-
-//        facilityRepository.save(facility);
         return repository.save(developer);
     }
 
