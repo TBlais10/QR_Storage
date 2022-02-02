@@ -1,7 +1,6 @@
-package com.qr_storeage.QR_StoragePt2.Models.Facilities;
+package com.qr_storeage.QR_StoragePt2.Models.Site;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.qr_storeage.QR_StoragePt2.Models.Authentication.User;
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
@@ -11,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
-public class Facility {
+public class Site {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +39,10 @@ public class Facility {
     //@ManyToMany
 //    private User users;
 
-    public Facility() {
+    public Site() {
     }
 
-    public Facility(String name, Avatar avatar) {
+    public Site(String name, Avatar avatar) {
         this.name = name;
         this.avatar = avatar;
     }

@@ -1,8 +1,7 @@
-package com.qr_storeage.QR_StoragePt2.Controllers.Facility;
+package com.qr_storeage.QR_StoragePt2.Controllers.Site;
 
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
-import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
-import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
+import com.qr_storeage.QR_StoragePt2.Models.Site.Site;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.FacilityRepository;
@@ -16,13 +15,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Validated
 @CrossOrigin
 @RestController
 @RequestMapping("/api/facilities")
-public class FacilityController {
+public class SiteController {
 
     @Autowired
     private FacilityRepository repository;
@@ -34,12 +32,12 @@ public class FacilityController {
     private AvatarRepository avatarRepository;
 
     @GetMapping("/{id}")
-    public Facility getById(@PathVariable Long id){
+    public Site getById(@PathVariable Long id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping
-    public List<Facility> getAll(){
+    public List<Site> getAll(){
         return repository.findAll();
     }
 
@@ -53,49 +51,51 @@ public class FacilityController {
 //    }
 
     @PostMapping
-    public Facility createOne(@Valid @RequestBody Facility newFacility){
-        return repository.save(newFacility);
+    public Site createOne(@Valid @RequestBody Site newSite){
+        return repository.save(newSite);
     }
 
     @PostMapping("/photo")
-    public Facility addPhoto(@RequestBody Facility facil){
-        Facility facility = repository.findById(facil.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public Site addPhoto(@RequestBody Site facil){
+        Site site = repository.findById(facil.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        if (facility.getAvatar() != null){
-            Avatar avatar = facility.getAvatar();
+        if (site.getAvatar() != null){
+            Avatar avatar = site.getAvatar();
             avatar.setUrl(facil.getAvatar().getUrl());
             avatarRepository.save(avatar);
-            return facility;
+            return site;
         }
 
         Avatar avatar = avatarRepository.save(facil.getAvatar());
-        facility.setAvatar(avatar);
-        return repository.save(facility);
+        site.setAvatar(avatar);
+        return repository.save(site);
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody Facility updateFacility(@PathVariable Long id, @RequestBody Facility updates){
+    public @ResponseBody
+    Site updateFacility(@PathVariable Long id, @RequestBody Site updates){
 
-        Facility facility = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Site site = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        if (facility.getName() != null){
-            facility.setName(updates.getName());
+        if (site.getName() != null){
+            site.setName(updates.getName());
         }
-        if (facility.getAvatar() != null){
-            facility.setAvatar(updates.getAvatar());
+        if (site.getAvatar() != null){
+            site.setAvatar(updates.getAvatar());
         }
 
-        return repository.save(facility);
+        return repository.save(site);
     }
 
     @PostMapping("/addLocation/{lId}") //TODO: Create if null catch + infinite json body
-    public @ResponseBody Facility addLocation(@RequestBody Facility updates, @PathVariable Long lId){
-        Facility facility = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public @ResponseBody
+    Site addLocation(@RequestBody Site updates, @PathVariable Long lId){
+        Site site = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Location location = locationRepository.findById(lId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        facility.getLocations().add(location);
+        site.getLocations().add(location);
 
-        return repository.save(facility);
+        return repository.save(site);
     }
 
     @DeleteMapping("/{id}")

@@ -2,9 +2,6 @@ package com.qr_storeage.QR_StoragePt2.Models.Avatars;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
-import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
-import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 
 import javax.persistence.*;
 

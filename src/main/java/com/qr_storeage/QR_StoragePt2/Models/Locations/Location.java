@@ -1,12 +1,11 @@
 package com.qr_storeage.QR_StoragePt2.Models.Locations;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.qr_storeage.QR_StoragePt2.Models.Facilities.Facility;
+import com.qr_storeage.QR_StoragePt2.Models.Site.Site;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,7 +20,7 @@ public class Location {
 
     @ManyToOne
     @JoinColumn(name = "facility_id", referencedColumnName = "id")
-    private Facility facility;
+    private Site site;
 
     @ManyToMany
     @JoinTable(
@@ -35,9 +34,9 @@ public class Location {
     public Location() {
     }
 
-    public Location(String name, Facility facility) {
+    public Location(String name, Site site) {
         this.name = name;
-        this.facility = facility;
+        this.site = site;
     }
 
     public Long getId() {
@@ -64,11 +63,11 @@ public class Location {
         this.items = items;
     }
 
-    public Facility getFacility() {
-        return facility;
+    public Site getFacility() {
+        return site;
     }
 
-    public void setFacility(Facility facility) {
-        this.facility = facility;
+    public void setFacility(Site site) {
+        this.site = site;
     }
 }
