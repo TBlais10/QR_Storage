@@ -28,7 +28,7 @@ public class Developer {
     @JoinTable(
             name = "developer_facility",
             joinColumns = @JoinColumn(name = "developer_id"),
-            inverseJoinColumns = @JoinColumn(name = "facility_id")
+            inverseJoinColumns = @JoinColumn(name = "site_id")
     )
     private Set<Site> facilities = new HashSet<>();
 

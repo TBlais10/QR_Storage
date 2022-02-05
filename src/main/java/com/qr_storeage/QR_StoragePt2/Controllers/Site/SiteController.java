@@ -4,7 +4,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Site.Site;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
-import com.qr_storeage.QR_StoragePt2.Repositories.FacilityRepository;
+import com.qr_storeage.QR_StoragePt2.Repositories.SiteRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ import java.util.List;
 public class SiteController {
 
     @Autowired
-    private FacilityRepository repository;
+    private SiteRepository repository;
 
     @Autowired
     private LocationRepository locationRepository;
@@ -73,7 +73,7 @@ public class SiteController {
 
     @PutMapping("/{id}")
     public @ResponseBody
-    Site updateFacility(@PathVariable Long id, @RequestBody Site updates){
+    Site updateSite(@PathVariable Long id, @RequestBody Site updates){
 
         Site site = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -99,10 +99,10 @@ public class SiteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteByFacilityId (@PathVariable Long id){
+    public ResponseEntity<String> deleteBySiteId (@PathVariable Long id){
         String facilityName = repository.getById(id).getName();
         repository.deleteById(id);
-        return new ResponseEntity<>("Successfully deleted the " + facilityName + " facility.", HttpStatus.OK);
+        return new ResponseEntity<>("Successfully deleted the " + facilityName + " Site.", HttpStatus.OK);
     }
 
 

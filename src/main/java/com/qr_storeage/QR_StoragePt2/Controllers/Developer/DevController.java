@@ -5,7 +5,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
 import com.qr_storeage.QR_StoragePt2.Models.Site.Site;
 import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.DeveloperRepository;
-import com.qr_storeage.QR_StoragePt2.Repositories.FacilityRepository;
+import com.qr_storeage.QR_StoragePt2.Repositories.SiteRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,7 @@ public class DevController {
     private UserRepository userRepository;
 
     @Autowired
-    private FacilityRepository facilityRepository;
+    private SiteRepository siteRepository;
 
     @GetMapping
     public @ResponseBody List<Developer> getDevelopers(){
@@ -75,7 +75,7 @@ public class DevController {
     //Url has the id for the facility, JSON Body = { "id" : the developer id }
     public Developer addFacility(@RequestBody Developer updates, @PathVariable Long fId){
         Developer developer = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Site site = facilityRepository.findById(fId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Site site = siteRepository.findById(fId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         developer.getFacilities().add(site);
         return repository.save(developer);

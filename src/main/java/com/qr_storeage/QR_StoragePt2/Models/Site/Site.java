@@ -24,13 +24,13 @@ public class Site {
     private Avatar avatar;
 
     @OneToMany
-    @JoinColumn(name = "facility_id", referencedColumnName = "id")
+    @JoinColumn(name = "site_id", referencedColumnName = "id")
     private Set<Location> locations;
 
     @ManyToMany
     @JoinTable(
             name="developer_facility",
-            joinColumns = @JoinColumn(name = "facility_id"),
+            joinColumns = @JoinColumn(name = "site_id"),
             inverseJoinColumns = @JoinColumn(name = "developer_id")
     )
     @JsonIgnoreProperties({"email", "avatar", "facilities"})

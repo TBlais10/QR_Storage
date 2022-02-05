@@ -19,7 +19,7 @@ public class Location {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "facility_id", referencedColumnName = "id")
+    @JoinColumn(name = "site_id", referencedColumnName = "id")
     private Site site;
 
     @ManyToMany
