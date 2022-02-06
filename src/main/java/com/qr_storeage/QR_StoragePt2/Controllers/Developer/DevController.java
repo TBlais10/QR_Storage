@@ -77,7 +77,7 @@ public class DevController {
         Developer developer = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Site site = siteRepository.findById(fId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        developer.getFacilities().add(site);
+        developer.getSites().add(site);
         return repository.save(developer);
     }
 

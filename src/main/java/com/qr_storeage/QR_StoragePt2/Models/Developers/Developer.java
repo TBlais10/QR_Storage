@@ -30,7 +30,7 @@ public class Developer {
             joinColumns = @JoinColumn(name = "developer_id"),
             inverseJoinColumns = @JoinColumn(name = "site_id")
     )
-    private Set<Site> facilities = new HashSet<>();
+    private Set<Site> sites = new HashSet<>();
 
     @OneToOne
     @JoinColumn(name = "avatar_id")
@@ -92,11 +92,12 @@ public class Developer {
 //        this.user = user;
 //    }
 
-    public Set<Site> getFacilities() {
-        return facilities;
+
+    public Set<Site> getSites() {
+        return sites;
     }
 
-    public void setFacilities(Set<Site> facilities) {
-        this.facilities = facilities;
+    public void setSites(Set<Site> sites) {
+        this.sites = sites;
     }
 }

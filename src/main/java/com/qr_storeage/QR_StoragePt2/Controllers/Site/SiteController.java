@@ -19,7 +19,7 @@ import java.util.List;
 @Validated
 @CrossOrigin
 @RestController
-@RequestMapping("/api/facilities")
+@RequestMapping("/api/sites")
 public class SiteController {
 
     @Autowired
