@@ -13,8 +13,6 @@ import java.time.LocalDate;
 @Entity
 public class Client {
 
-    // TODO: 2/5/2022 Build out controller
-        //create one, get one, delete one
     // TODO: 2/5/2022 Does client need an avatar? Identification depending on transaction?
 
     @Id

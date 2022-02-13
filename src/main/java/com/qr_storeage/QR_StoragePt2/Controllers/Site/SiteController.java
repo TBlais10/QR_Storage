@@ -93,7 +93,7 @@ public class SiteController {
         Site site = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Location location = locationRepository.findById(lId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        site.getLocations().add(location);
+        site.locations.add(location);
 
         return repository.save(site);
     }

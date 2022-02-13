@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,12 +28,13 @@ public class Item {
             inverseJoinColumns = @JoinColumn(name = "location_id")
     )
     @JsonIgnoreProperties({"facility"})
-    private Set<Location> location;
+    public Set<Location> location;
 
 
     @NotBlank(message = "Item must have a name")
     private String name;
     private String description;
+    private HashSet<String> tags;
     private Long quantity;
 
     @NotNull(message = "Condition of item must be given")
@@ -100,6 +102,14 @@ public class Item {
         this.description = description;
     }
 
+    public HashSet<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(HashSet<String> tags) {
+        this.tags = tags;
+    }
+
     public Long getQuantity() {
         return quantity;
     }
@@ -114,14 +124,6 @@ public class Item {
 
     public void setCond(ECond cond) {
         this.cond = cond;
-    }
-
-    public Set<Location> getLocation() { //TODO: Add a way to iterate thru the list to get a specific location.
-        return location;
-    }
-
-    public void setLocation(Set<Location> location) {
-        this.location = location;
     }
 
     public String getType() {

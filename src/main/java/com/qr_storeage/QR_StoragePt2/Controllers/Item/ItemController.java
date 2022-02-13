@@ -77,6 +77,7 @@ public class ItemController {
 
         if (update.getName() != null) item.setName(update.getName());
         if (update.getDescription() != null) item.setDescription(update.getDescription());
+        if (update.getTags() != null) item.setTags(update.getTags());
         if (update.getQuantity() != null) item.setQuantity(update.getQuantity());
         if (update.getCond() != null) item.setCond(update.getCond());
         if (update.getStatus() != null) item.setStatus(update.getStatus());

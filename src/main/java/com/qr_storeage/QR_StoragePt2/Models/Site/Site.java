@@ -25,7 +25,7 @@ public class Site {
 
     @OneToMany
     @JoinColumn(name = "site_id", referencedColumnName = "id")
-    private Set<Location> locations;
+    public Set<Location> locations;
 
     @ManyToMany
     @JoinTable(
@@ -34,7 +34,7 @@ public class Site {
             inverseJoinColumns = @JoinColumn(name = "developer_id")
     )
     @JsonIgnoreProperties({"email", "avatar", "facilities"})
-    private Set<Developer> developers;
+    public Set<Developer> developers;
 
     //@ManyToMany
 //    private User users;
@@ -71,21 +71,6 @@ public class Site {
         this.avatar = avatar;
     }
 
-    public Set<Location> getLocations() {
-        return locations;
-    }
-
-    public void setLocations(Set<Location> locations) {
-        this.locations = locations;
-    }
-
-    public Set<Developer> getDevelopers() {
-        return developers;
-    }
-
-    public void setDevelopers(Set<Developer> developers) {
-        this.developers = developers;
-    }
 
 //    public User getUsers() {
 //        return users;
