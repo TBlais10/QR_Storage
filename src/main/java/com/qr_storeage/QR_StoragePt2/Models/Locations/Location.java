@@ -29,7 +29,7 @@ public class Location {
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
     @JsonIgnoreProperties({"tote", "location"})
-    private Set<Item> items;
+    public Set<Item> items;
 
     public Location() {
     }
@@ -53,14 +53,6 @@ public class Location {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(Set<Item> items) {
-        this.items = items;
     }
 
     public Site getFacility() {

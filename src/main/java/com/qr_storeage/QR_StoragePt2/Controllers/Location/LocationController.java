@@ -57,7 +57,7 @@ public class LocationController {
         Location location = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Item item = itemRepository.findById(iId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        location.getItems().add(item);
+        location.items.add(item);
 
         return repository.save(location);
     }
