@@ -27,7 +27,7 @@ public class Item {
             joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "location_id")
     )
-    @JsonIgnoreProperties({"site"})
+    @JsonIgnoreProperties({"site" , "id"})
     public Set<Location> location;
 
 

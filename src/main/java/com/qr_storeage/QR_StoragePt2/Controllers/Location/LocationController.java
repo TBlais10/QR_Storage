@@ -45,8 +45,8 @@ public class LocationController {
         if (location.getName() != null) {
             location.setName(updates.getName());
         }
-        if (location.getFacility() != null){
-            location.setFacility(updates.getFacility());
+        if (location.site != null){
+            location.site = updates.site;
         }
 
         return repository.save(location);

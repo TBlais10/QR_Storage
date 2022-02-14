@@ -1,5 +1,6 @@
 package com.qr_storeage.QR_StoragePt2.Models.Developers;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Site.Site;
 
@@ -30,6 +31,7 @@ public class Developer {
             joinColumns = @JoinColumn(name = "developer_id"),
             inverseJoinColumns = @JoinColumn(name = "site_id")
     )
+    @JsonIgnoreProperties("locations")
     public Set<Site> sites = new HashSet<>();
 
     @OneToOne

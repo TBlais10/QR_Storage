@@ -25,6 +25,7 @@ public class Site {
 
     @OneToMany
     @JoinColumn(name = "site_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("site")
     public Set<Location> locations;
 
     @ManyToMany
@@ -33,7 +34,7 @@ public class Site {
             joinColumns = @JoinColumn(name = "site_id"),
             inverseJoinColumns = @JoinColumn(name = "developer_id")
     )
-    @JsonIgnoreProperties({"email", "avatar", "facilities"})
+    @JsonIgnoreProperties({"email", "avatar", "sites"})
     public Set<Developer> developers;
 
     //@ManyToMany

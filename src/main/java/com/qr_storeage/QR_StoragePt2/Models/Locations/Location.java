@@ -1,6 +1,7 @@
 package com.qr_storeage.QR_StoragePt2.Models.Locations;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.qr_storeage.QR_StoragePt2.Models.Site.Site;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 
@@ -20,7 +21,8 @@ public class Location {
 
     @ManyToOne
     @JoinColumn(name = "site_id", referencedColumnName = "id")
-    private Site site;
+    @JsonIgnoreProperties({"developers", "locations"})
+    public Site site;
 
     @ManyToMany
     @JoinTable(
@@ -28,7 +30,8 @@ public class Location {
             joinColumns = @JoinColumn(name = "location_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
-    @JsonIgnoreProperties({"tote", "location"})
+//    @JsonIgnoreProperties({"tote", "location"})
+    @JsonIncludeProperties({"id", "name", "quantity"})
     public Set<Item> items;
 
     public Location() {
@@ -55,11 +58,4 @@ public class Location {
         this.name = name;
     }
 
-    public Site getFacility() {
-        return site;
-    }
-
-    public void setFacility(Site site) {
-        this.site = site;
-    }
 }
