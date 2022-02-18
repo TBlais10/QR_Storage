@@ -57,7 +57,12 @@ public class LocationController {
         Location location = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Item item = itemRepository.findById(iId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        location.items.add(item);
+        // TODO: 2/17/2022 Test application of this check
+//        if (repository.findItemInLocationBy_Id(location.getId(), iId)){ //if the item already exists in this location, combind quantities
+
+//        } else { //if not add it to the shelf
+            location.items.add(item);
+//        }
 
         return repository.save(location);
     }

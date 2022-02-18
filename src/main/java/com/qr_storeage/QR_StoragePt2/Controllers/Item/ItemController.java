@@ -2,6 +2,7 @@ package com.qr_storeage.QR_StoragePt2.Controllers.Item;
 
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
+import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.ItemRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
@@ -14,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Validated
 @CrossOrigin
@@ -39,17 +41,22 @@ public class ItemController {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    //TODO: pull list of items from a specific location
-//    @GetMapping("/{location}")
-//    public ResponseEntity<Iterable<Item>> getAllInLocation(@PathVariable Long id){
-//        try{
-//            return locationRepository.findByLocationId(id).}
-//    }
+    // TODO: 2/17/2022 test!
+    @GetMapping("/{Iid}")
+    public Set<Location> findItemLocations (@PathVariable Long id){
+        Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
+        return item.location;
+    }
 
     @PostMapping //TODO: Implement try catch for Not Empty checks + Test by creating items.
     public ResponseEntity<Item> createItem(@Valid @RequestBody Item item){
 //        System.out.println(item.getLocation().getId()); //TODO: Create method that iterates thru the list to check this field.
+
+        // TODO: 2/17/2022 TEST!
+        if (repository.findItemByName(item.getName())){
+            return null;
+        }
 
         return new ResponseEntity<>(repository.save(item), HttpStatus.OK);
 
