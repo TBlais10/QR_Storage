@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LocationRepository extends JpaRepository<Location, Long> {
 
-    boolean findItemInLocationBy_Id(Long lId, Long iId);
+//    boolean findItemInLocationBy_Id(Long lId, Long iId);
 
 }

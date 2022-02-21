@@ -1,11 +1,11 @@
 package com.qr_storeage.QR_StoragePt2.Models.Totes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.qr_storeage.QR_StoragePt2.Models.Authentication.User;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,6 +16,7 @@ public class Tote {
     private Long id;
 
     @OneToMany
+    @JsonIncludeProperties({"name", "quantity"})
     private Set<Item> items;
     private String name;
 
@@ -24,8 +25,11 @@ public class Tote {
     private User user;
 
 
-    public Tote() { //TODO: this.id returning null on tote creation.
-        this.name = "TOTE-" + this.id;
+    public Tote() {
+    }
+
+    public Tote(String name) {
+        this.name = name;
     }
 
     public Long getId() {

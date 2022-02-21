@@ -29,7 +29,7 @@ public class ToteController {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/id")
+    @GetMapping("/items/{id}")
     public Set<Item> itemsInTote (@PathVariable Long id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)).getItems();
     }
