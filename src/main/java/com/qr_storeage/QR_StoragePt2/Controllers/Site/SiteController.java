@@ -1,9 +1,11 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Site;
 
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
+import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
 import com.qr_storeage.QR_StoragePt2.Models.Site.Site;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
+import com.qr_storeage.QR_StoragePt2.Repositories.DeveloperRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.SiteRepository;
 import com.qr_storeage.QR_StoragePt2.Repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class SiteController {
 
     @Autowired
     private AvatarRepository avatarRepository;
+
+    @Autowired
+    private DeveloperRepository developerRepository;
 
     @GetMapping("/{id}")
     public Site getById(@PathVariable Long id){
@@ -87,6 +92,16 @@ public class SiteController {
         return repository.save(site);
     }
 
+    @PostMapping("/addDeveloper/{id}")
+    public @ResponseBody Site addDeveloper(@RequestBody Site updates, @PathVariable Long id){
+        Site site = repository.findById(updates.getId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Developer developer = developerRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        site.developers.add(developer);
+
+        return repository.save(site);
+    }
+
     @PostMapping("/addLocation/{lId}") //TODO: Create if null catch + infinite json body
     public @ResponseBody
     Site addLocation(@RequestBody Site updates, @PathVariable Long lId){
@@ -104,6 +119,5 @@ public class SiteController {
         repository.deleteById(id);
         return new ResponseEntity<>("Successfully deleted the " + facilityName + " Site.", HttpStatus.OK);
     }
-
 
 }

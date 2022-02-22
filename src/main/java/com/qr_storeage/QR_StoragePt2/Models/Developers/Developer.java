@@ -3,6 +3,7 @@ package com.qr_storeage.QR_StoragePt2.Models.Developers;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
 import com.qr_storeage.QR_StoragePt2.Models.Site.Site;
+import com.qr_storeage.QR_StoragePt2.Models.Totes.Tote;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -38,6 +39,10 @@ public class Developer {
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;
 
+    @OneToOne
+    @JoinColumn(name = "tote_id")
+    private Tote tote;
+
 //    @OneToOne
 //    @JoinColumn(name = "user_id", referencedColumnName = "id")
 //    @JsonIgnore
@@ -47,11 +52,12 @@ public class Developer {
     public Developer() {
     }
 
-    public Developer(String name, String email, Avatar avatar/*, User user*/) {
+    public Developer(String name, String email, Avatar avatar, Tote tote/*, User user*/) {
         this.name = name;
         this.email = email;
         this.avatar = avatar;
 //        this.user = user;
+        this.tote = tote;
     }
 
     public Long getId() {

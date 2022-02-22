@@ -25,7 +25,7 @@ public class Site {
 
     @OneToMany
     @JoinColumn(name = "site_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("site")
+    @JsonIgnoreProperties({"site", "items"})
     public Set<Location> locations;
 
     @ManyToMany

@@ -3,6 +3,7 @@ package com.qr_storeage.QR_StoragePt2.Models.Totes;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.qr_storeage.QR_StoragePt2.Models.Authentication.User;
+import com.qr_storeage.QR_StoragePt2.Models.Developers.Developer;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 
 import javax.persistence.*;
@@ -24,12 +25,17 @@ public class Tote {
     @JsonIgnoreProperties({"password"})
     private User user;
 
+    @OneToOne
+    @JoinColumn(name = "developer_id")
+    private Developer developer;
+
 
     public Tote() {
     }
 
-    public Tote(String name) {
+    public Tote(String name, Developer developer) {
         this.name = name;
+        this.developer = developer;
     }
 
     public Long getId() {
