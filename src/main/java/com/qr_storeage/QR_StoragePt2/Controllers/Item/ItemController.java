@@ -98,7 +98,7 @@ public class ItemController {
 
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateQuantity(@PathVariable Long id,@RequestBody Item update){
         Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
