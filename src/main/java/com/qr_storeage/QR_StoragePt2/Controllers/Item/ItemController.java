@@ -1,6 +1,7 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Item;
 
 import com.qr_storeage.QR_StoragePt2.Models.Avatars.Avatar;
+import com.qr_storeage.QR_StoragePt2.Models.Items.ELocationTag;
 import com.qr_storeage.QR_StoragePt2.Models.Items.Item;
 import com.qr_storeage.QR_StoragePt2.Models.Locations.Location;
 import com.qr_storeage.QR_StoragePt2.Repositories.AvatarRepository;
@@ -95,6 +96,22 @@ public class ItemController {
 
         return repository.save(item);
 
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<String> updateQuantity(@PathVariable Long id,@RequestBody Item update){
+        Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (update.getQuantity() != null) item.setQuantity(update.getQuantity());
+
+        // TODO: 2/26/2022 if quantity is going to go negative, create a catch and confirm.
+
+        if (update.getQuantity() == 0 && update.getLocationTag() != ELocationTag.PRIMARY){
+            repository.deleteById(id);
+        }
+
+        repository.save(update);
+        return new ResponseEntity<String>("Updated Quantity of " + update.getName() + " to " + update.getQuantity(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
