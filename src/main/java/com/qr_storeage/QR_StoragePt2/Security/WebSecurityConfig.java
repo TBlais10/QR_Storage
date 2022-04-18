@@ -1,5 +1,6 @@
 package com.qr_storeage.QR_StoragePt2.Security;
 
+import com.qr_storeage.QR_StoragePt2.Security.Services.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserDetailService userDetailService;
+    UserDetailServiceImpl userDetailService;
 
     @Autowired
     private AuthenticationEntryPoint unauthorizedHandler;
@@ -27,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder) throws Exception{
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception{
         authenticationManagerBuilder.userDetailService(userDetailService);
     }
 }
