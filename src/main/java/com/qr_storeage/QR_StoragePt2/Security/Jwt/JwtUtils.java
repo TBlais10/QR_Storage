@@ -20,7 +20,7 @@ public class JwtUtils {
     public boolean validateJwtToken(String authToken) {
         try{
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
-            return true
+            return true;
         } catch (SignatureException e) {
             logger.error("Invalid JWT signature");
         } catch (MalformedJwtException e){
