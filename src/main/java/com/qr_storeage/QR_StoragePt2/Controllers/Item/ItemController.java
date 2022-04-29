@@ -42,13 +42,13 @@ public class ItemController {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    // TODO: 2/17/2022 test!
-    @GetMapping("/{Iid}")
-    public Set<Location> findItemLocations (@PathVariable Long id){
-        Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        return item.location;
-    }
+//    // TODO: 2/17/2022 test!
+//    @GetMapping("/{Iid}")
+//    public Set<Location> findItemLocations (@PathVariable Long id){
+//        Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+//
+//        return item.location;
+//    }
 
     @PostMapping //TODO: Implement try catch for Not Empty checks + Test by creating items.
     public ResponseEntity<Item> createItem(@Valid @RequestBody Item item){
@@ -79,7 +79,7 @@ public class ItemController {
 
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public @ResponseBody Item updateOne (@PathVariable Long id, @RequestBody Item update){
         Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 

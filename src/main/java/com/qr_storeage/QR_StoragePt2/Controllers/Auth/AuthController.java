@@ -1,8 +1,8 @@
 package com.qr_storeage.QR_StoragePt2.Controllers.Auth;
 
-import com.qr_storeage.QR_StoragePt2.Auth.User;
 import com.qr_storeage.QR_StoragePt2.Models.Auth.ERole;
 import com.qr_storeage.QR_StoragePt2.Models.Auth.Role;
+import com.qr_storeage.QR_StoragePt2.Models.Auth.User;
 import com.qr_storeage.QR_StoragePt2.Payload.Request.LoginRequest;
 import com.qr_storeage.QR_StoragePt2.Payload.Request.SignupRequest;
 import com.qr_storeage.QR_StoragePt2.Payload.Response.JwtResponse;
@@ -104,6 +104,6 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return new ResponseEntity(new MessageResponse("User registered sucessfully")), HttpStatus.CREATED;
+        return new ResponseEntity(new MessageResponse("User registered sucessfully"), HttpStatus.CREATED);
     }
 }

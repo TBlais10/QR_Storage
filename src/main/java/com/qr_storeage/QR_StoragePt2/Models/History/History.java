@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JsonIncludeProperties({"id, name, location, quantity"})
@@ -25,4 +26,45 @@ public class History {
 
     @JsonFormat(pattern = "MM-DD-YYYY")
     private LocalDate logTime;
+
+    public History() {
+    }
+
+    public History(Item item, Developer developer, LocalDate logTime) {
+        this.item = item;
+        this.developer = developer;
+        this.logTime = logTime;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Developer getDeveloper() {
+        return developer;
+    }
+
+    public void setDeveloper(Developer developer) {
+        this.developer = developer;
+    }
+
+    public LocalDate getLogTime() {
+        return logTime;
+    }
+
+    public void setLogTime(LocalDate logTime) {
+        this.logTime = logTime;
+    }
 }
