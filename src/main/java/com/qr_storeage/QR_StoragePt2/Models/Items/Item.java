@@ -38,13 +38,22 @@ public class Item {
     private Long quantity;
 
     @NotNull(message = "Condition of item must be given")
-    @Enumerated(EnumType.STRING)
+//    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "item_condition",
+                joinColumns = @JoinColumn(name = "item_id"),
+                inverseJoinColumns = @JoinColumn(name = "condition_id"))
     private ECond cond; //condition of item
 
-    @Enumerated(EnumType.STRING)
+//    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "item_status",
+                joinColumns = @JoinColumn(name = "item_id"),
+                inverseJoinColumns = @JoinColumn(name = "status_id"))
     private EStatus status;
 
-    @Enumerated(EnumType.STRING)
+//    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "item_locations",
+                joinColumns = @JoinColumn(name = "item_id"),
+                inverseJoinColumns = @JoinColumn(name = "locationTag_id"))
     private ELocationTag locationTag;
 
     private String type;
