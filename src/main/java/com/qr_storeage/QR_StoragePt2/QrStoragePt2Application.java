@@ -1,9 +1,10 @@
 package com.qr_storeage.QR_StoragePt2;
 
 import com.qr_storeage.QR_StoragePt2.Models.Auth.ERole;
-import com.qr_storeage.QR_StoragePt2.Repositories.ItemRepository;
-import com.qr_storeage.QR_StoragePt2.Repositories.RoleRepository;
-import com.qr_storeage.QR_StoragePt2.Repositories.UserRepository;
+import com.qr_storeage.QR_StoragePt2.Models.Items.ECond;
+import com.qr_storeage.QR_StoragePt2.Models.Items.ELocationTag;
+import com.qr_storeage.QR_StoragePt2.Models.Items.EStatus;
+import com.qr_storeage.QR_StoragePt2.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -27,6 +28,15 @@ public class QrStoragePt2Application {
 	@Autowired
 	private ItemRepository itemRepository;
 
+	@Autowired
+	private StatusRepository statusRepository;
+
+	@Autowired
+	private CondRepository condRepository;
+
+	@Autowired
+	private LocationTagRepository locationTagRepository;
+
 	@Value("${spring.datasource.driver-class-name}")
 	public String myDriver;
 
@@ -44,8 +54,11 @@ public class QrStoragePt2Application {
 	}
 
 	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder){
+	public void loadEnums(){
 		int roleCheck = roleRepository.isRoleEmpty();
+		int statusCheck = statusRepository.isStatusEmpty();
+		int condCheck = condRepository.isCondEmpty();
+		int tagCheck = locationTagRepository.isTagEmpty();
 
 		if (roleCheck < ERole.values().length){
 			int id = 1;
@@ -68,7 +81,72 @@ public class QrStoragePt2Application {
 				id++;
 			}
 		}
-		return builder.build();
-	}
 
+		if (statusCheck < EStatus.values().length){
+			int id = 1;
+			for (EStatus status : EStatus.values()) {
+				if (statusRepository.findByName(status).isEmpty()){
+					try{
+						Connection conn = DriverManager.getConnection(myUrl, username, password);
+						Class.forName(myDriver);
+						String query = "Insert into status (id, name) values (?,?)";
+						PreparedStatement statement = conn.prepareStatement(query);
+
+						statement.setString(1, Integer.toString(id));
+						statement.setString(2, status.toString());
+
+						statement.executeUpdate();
+					} catch (Exception e){
+						System.out.println(e.getMessage());
+					}
+				}
+				id++;
+			}
+		}
+
+		if (condCheck < ECond.values().length){
+			int id = 1;
+			for (ECond condition : ECond.values()) {
+				if (condRepository.findByName(condition).isEmpty()){
+					try{
+						Connection conn = DriverManager.getConnection(myUrl, username, password);
+						Class.forName(myDriver);
+						String query = "Insert into cond (id, name) values (?,?)";
+						PreparedStatement statement = conn.prepareStatement(query);
+
+						statement.setString(1, Integer.toString(id));
+						statement.setString(2, condition.toString());
+
+						statement.executeUpdate();
+					} catch (Exception e){
+						System.out.println(e.getMessage());
+					}
+				}
+				id++;
+			}
+		}
+
+		if (tagCheck < ELocationTag.values().length){
+			int id = 1;
+			for (ELocationTag tag : ELocationTag.values()) {
+				if (locationTagRepository.findByName(tag).isEmpty()){
+					try{
+						Connection conn = DriverManager.getConnection(myUrl, username, password);
+						Class.forName(myDriver);
+						String query = "Insert into location_tag (id, name) values (?,?)";
+						PreparedStatement statement = conn.prepareStatement(query);
+
+						statement.setString(1, Integer.toString(id));
+						statement.setString(2, tag.toString());
+
+						statement.executeUpdate();
+					} catch (Exception e){
+						System.out.println(e.getMessage());
+					}
+				}
+				id++;
+			}
+		}
+
+	}
 }
