@@ -5,7 +5,7 @@ import com.qr_storeage.QR_StoragePt2.Models.Auth.ERole;
 import javax.persistence.*;
 
 @Entity
-public class Condition {
+public class Cond {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,10 +14,10 @@ public class Condition {
     @Column(length = 20)
     private ECond name;
 
-    public Condition() {
+    public Cond() {
     }
 
-    public Condition(Long id, ECond name) {
+    public Cond(Long id, ECond name) {
         this.id = id;
         this.name = name;
     }

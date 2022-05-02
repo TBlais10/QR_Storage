@@ -106,7 +106,7 @@ public class ItemController {
 
         // TODO: 2/26/2022 if quantity is going to go negative, create a catch and confirm.
 
-        if (update.getQuantity() == 0 && update.getLocationTag() != ELocationTag.PRIMARY){
+        if (update.getQuantity() == 0 && update.getLocationTag().getName() != ELocationTag.PRIMARY){
             repository.deleteById(id);
         }
 

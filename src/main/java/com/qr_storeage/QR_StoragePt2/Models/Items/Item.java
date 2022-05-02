@@ -8,7 +8,6 @@ import com.qr_storeage.QR_StoragePt2.Models.Totes.Tote;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -38,23 +37,23 @@ public class Item {
     private Long quantity;
 
     @NotNull(message = "Condition of item must be given")
-//    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "item_condition",
                 joinColumns = @JoinColumn(name = "item_id"),
                 inverseJoinColumns = @JoinColumn(name = "condition_id"))
-    private ECond cond; //condition of item
+    private Cond cond; //condition of item
 
-//    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "item_status",
                 joinColumns = @JoinColumn(name = "item_id"),
                 inverseJoinColumns = @JoinColumn(name = "status_id"))
-    private EStatus status;
+    private Status status;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "item_locations",
                 joinColumns = @JoinColumn(name = "item_id"),
                 inverseJoinColumns = @JoinColumn(name = "locationTag_id"))
-    private ELocationTag locationTag;
+    private LocationTag locationTag;
 
     private String type;
     private String color;
@@ -73,7 +72,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(String name, String description, Long quantity, ECond cond, EStatus status, ELocationTag locationTag, String type, String color, String serialNumber, BigDecimal price, Avatar avatar) {
+    public Item(String name, String description, Long quantity, Cond cond, Status status, LocationTag locationTag, String type, String color, String serialNumber, BigDecimal price, Avatar avatar, Tote tote) {
         this.name = name;
         this.description = description;
         this.quantity = quantity;
@@ -85,6 +84,7 @@ public class Item {
         this.serialNumber = serialNumber;
         this.price = price;
         this.avatar = avatar;
+        this.tote = tote;
     }
 
     public Long getId() {
@@ -93,6 +93,14 @@ public class Item {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<Location> getLocation() {
+        return location;
+    }
+
+    public void setLocation(Set<Location> location) {
+        this.location = location;
     }
 
     public String getName() {
@@ -127,12 +135,28 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public ECond getCond() {
+    public Cond getCond() {
         return cond;
     }
 
-    public void setCond(ECond cond) {
+    public void setCond(Cond cond) {
         this.cond = cond;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public LocationTag getLocationTag() {
+        return locationTag;
+    }
+
+    public void setLocationTag(LocationTag locationTag) {
+        this.locationTag = locationTag;
     }
 
     public String getType() {
@@ -159,14 +183,6 @@ public class Item {
         this.serialNumber = serialNumber;
     }
 
-    public Avatar getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -175,27 +191,19 @@ public class Item {
         this.price = price;
     }
 
-//    public Set<Tote> getTote() {
-//        return tote;
-//    }
-//
-//    public void setTote(Set<Tote> tote) {
-//        this.tote = tote;
-//    }
-
-    public EStatus getStatus() {
-        return status;
+    public Avatar getAvatar() {
+        return avatar;
     }
 
-    public void setStatus(EStatus status) {
-        this.status = status;
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 
-    public ELocationTag getLocationTag() {
-        return locationTag;
+    public Tote getTote() {
+        return tote;
     }
 
-    public void setLocationTag(ELocationTag locationTag) {
-        this.locationTag = locationTag;
+    public void setTote(Tote tote) {
+        this.tote = tote;
     }
 }
