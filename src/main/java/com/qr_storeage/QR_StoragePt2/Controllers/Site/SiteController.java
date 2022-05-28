@@ -76,7 +76,7 @@ public class SiteController {
         return repository.save(site);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public @ResponseBody
     Site updateSite(@PathVariable Long id, @RequestBody Site updates){
 

@@ -81,12 +81,14 @@ public class DevController {
         return repository.save(developer);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public @ResponseBody Developer updateDeveloper(@Valid @PathVariable Long id, @RequestBody Developer updates){ //TODO: Try catches for @NotNull fields
 
         Developer developer = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        if (updates.getName() != null) developer.setName(updates.getName());
+        if (updates.getfName() != null) developer.setfName(updates.getfName());
+        if (updates.getlName() != null) developer.setlName(updates.getlName());
+        if (updates.getAvatar() != null) developer.setAvatar(updates.getAvatar());
         if (updates.getEmail() != null) developer.setEmail(updates.getEmail());
 
         return repository.save(developer);

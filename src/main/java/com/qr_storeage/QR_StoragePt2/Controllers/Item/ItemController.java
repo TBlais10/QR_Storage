@@ -79,7 +79,7 @@ public class ItemController {
 
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     public @ResponseBody Item updateOne (@PathVariable Long id, @RequestBody Item update){
         Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -98,16 +98,15 @@ public class ItemController {
 
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<String> updateQuantity(@PathVariable Long id,@RequestBody Item update){
         Item item = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         if (update.getQuantity() != null) item.setQuantity(update.getQuantity());
 
-        // TODO: 2/26/2022 if quantity is going to go negative, create a catch and confirm.
-
-        if (update.getQuantity() == 0 && update.getLocationTag().getName() != ELocationTag.PRIMARY){
+        if (update.getQuantity() <= 0 && update.getLocationTag().getName() != ELocationTag.PRIMARY){
             repository.deleteById(id);
+            return new ResponseEntity<String>("Updated Quantity of " + update.getName() +". Location deleted from quantity below 0.", HttpStatus.OK);
         }
 
         repository.save(update);

@@ -38,7 +38,7 @@ public class LocationController {
         return new ResponseEntity<>(repository.save(location), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public @ResponseBody Location updateLocation(@PathVariable Long id, @RequestBody Location updates){
         Location location = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
